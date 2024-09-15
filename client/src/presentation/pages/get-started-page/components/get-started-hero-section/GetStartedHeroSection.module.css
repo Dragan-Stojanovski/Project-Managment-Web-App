@@ -1,0 +1,40 @@
+.get_started_hero_section__container{
+    width:65%;
+    margin:auto;
+    padding-top:5rem;
+    text-align:center;
+}
+
+.get_started_hero_section__container h1{
+    font-size:3rem;
+    font-weight:900;
+    color:var(--secondary-black-color);
+    }
+
+    .get_started_hero_section__container p{
+        font-size:2rem;
+        }
+
+        .get_started_hero_section__container span{
+            font-weight:900;
+            color:var(--secondary-black-color);
+            border-bottom:2px solid var(--secondary-color);
+            }
+
+        @media only screen and (max-width: 768px) {
+            .get_started_hero_section__container{
+                width:95%;
+                margin:auto;
+                padding-top:2rem;
+                text-align:center;
+            }
+
+            .get_started_hero_section__container h1{
+                font-size:1.8rem;
+                }
+    
+                .get_started_hero_section__container p{
+                    font-size:1.4rem;
+                    }
+
+        }

@@ -1,0 +1,20 @@
+:root {
+--primary-color:rgb(30, 100, 230);
+--secondary-color: rgb(38, 136, 41);
+--dark-secondary-color: rgb(31, 119, 34);
+--white-color:white;
+--black-color:black;
+--secondary-black-color:RGB(29, 45, 53);
+--box-shadow:rgba(0, 0, 0, 0.1) 0px 4px 12px;
+--light-color: #0a66c213;
+
+}
+
+*{
+  margin:0;
+  padding:0;
+  font-family:sans-serif;
+}
+
+
+

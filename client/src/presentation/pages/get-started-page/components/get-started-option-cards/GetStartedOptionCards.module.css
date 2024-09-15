@@ -1,0 +1,9 @@
+.option_cards__wrapper{
+    display:flex;
+    justify-content:center;
+   align-content:stretch;
+   flex-wrap: wrap;
+   gap:3%;
+   margin-top:4rem;
+}
+
