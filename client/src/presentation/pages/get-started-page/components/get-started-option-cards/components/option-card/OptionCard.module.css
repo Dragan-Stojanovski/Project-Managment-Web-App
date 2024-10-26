@@ -2,7 +2,7 @@
   border: 1px solid var(--light-color);
   padding: 2rem;
   width: 25%;
-  border-radius: 20px;
+  border-radius: var(--border-radius-20);
   color: var(--secondary-black-color);
   box-shadow:var(--box-shadow);
 }
@@ -34,7 +34,7 @@
   background-color: var(--secondary-color);
   text-decoration: none;
   padding: 1rem;
-  border-radius: 20px;
+  border-radius: var(--border-radius-20);
   font-weight: 600;
  
   margin-left:0.5rem;

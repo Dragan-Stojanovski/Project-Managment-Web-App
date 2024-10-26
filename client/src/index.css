@@ -7,7 +7,10 @@
 --secondary-black-color:RGB(29, 45, 53);
 --box-shadow:rgba(0, 0, 0, 0.1) 0px 4px 12px;
 --light-color: #0a66c213;
-
+--border-radius-8:8px;
+--border-radius-12:12px;
+--border-radius-16:16px;
+--border-radius-20:20px;
 }
 
 *{
@@ -17,4 +20,7 @@
 }
 
 
-
+body {
+  padding:0;
+  margin:0;
+}

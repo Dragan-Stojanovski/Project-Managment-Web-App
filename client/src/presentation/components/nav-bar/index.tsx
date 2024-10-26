@@ -8,7 +8,6 @@ const NavBar = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [isDropdownVisible, setIsDropdownVisible] = useState(isMobile ? false : true); 
 
-
   const navItems = [
     { label: "What's New?", path: '/news' },
     { label: "Features", path: '/features' },

@@ -47,7 +47,7 @@ color:var(--primary-color);
     padding:0.8rem;
     font-weight:600;
     color:var(--white-color) !important;
-    border-radius:20px;
+    border-radius:var(--border-radius-20);
 }
 
 .get_started a:hover{

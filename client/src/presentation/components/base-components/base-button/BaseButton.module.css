@@ -1,0 +1,15 @@
+.base_button_wrapper{
+    text-decoration:none;
+    padding:12px;
+    font-size:16px;
+    font-weight:600;
+    background-color:var(--secondary-color);
+    border-radius:var(--border-radius-20);
+    border:none;
+    color:var(--white-color);
+    cursor:pointer;
+}
+
+.base_button_wrapper:hover {
+    background-color: var(--dark-secondary-color);
+  }

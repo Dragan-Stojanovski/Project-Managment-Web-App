@@ -18,7 +18,7 @@ const OptionCard = ({title, description, features, price}: IOptions):JSX.Element
 Invite guests for free.
 </div>
 <br></br>
-<Link to={`/signup/${title}`}>Try it for free</Link>
+<Link to={`/signup?package=${title}`}>Try it for free</Link>
 </div>
     )
 }
