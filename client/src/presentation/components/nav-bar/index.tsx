@@ -41,7 +41,7 @@ const NavBar = (): JSX.Element => {
             </li>
           ))}
           <li className={styles.get_started}>
-            <Link to="/getstarted">Pricing + Sign up</Link>
+            <Link to="/signup">Pricing + Sign up</Link>
           </li>
         </ul>
       </div>}

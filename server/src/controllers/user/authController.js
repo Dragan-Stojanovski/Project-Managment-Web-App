@@ -5,10 +5,10 @@ const userSchema = require("../../models/userSchema");
 
 exports.register = async (req, res) => {
   try {
-    const { username, password, email, organization, packageType } = req.body;
+    const { username, password, email, organization, } = req.body;
 
     // Validate if all required fields are provided
-    if (!username || !password || !email || !organization || !packageType) {
+    if (!username || !password || !email || !organization ) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
       email,
       organization,
       password: hashedPassword,
-      packageType
+    
     });
 
     // Save the user to the database
