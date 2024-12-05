@@ -1,7 +1,6 @@
 const UserSchema = require("../../models/userSchema");
 const bcrypt = require("bcryptjs");
 
-
 exports.getUserOwnData = async (req, res) => {
     try {
       const userData = await UserSchema.findById(req.user.userId).select("-password");
