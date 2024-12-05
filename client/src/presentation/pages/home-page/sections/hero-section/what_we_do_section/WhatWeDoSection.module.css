@@ -1,0 +1,75 @@
+.what_we_do__wrapper h2{
+    color:var(--secondary-black-color);
+    text-align:center;
+    font-size:44px;
+}
+
+.what_we_do__wrapper p {
+    color:#707070;
+    text-align:center;
+    width:40%;
+    margin:auto;
+    margin-top:20px;
+}
+
+.what_we_do__container{
+    padding-top:60px;
+}
+
+
+.our_job_wrapper{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+width:70%;
+margin:auto;
+margin-top:100px;
+}
+
+.our_job_box{
+width:25%;
+padding:40px;
+border:1px solid var(--light-color);
+text-align:center;
+position:relative;
+box-sizing:border-box;
+}
+
+.our_job_box h3{
+    color:var(--secondary-black-color);
+    margin-top:40px;
+}
+
+.our_job_box p{
+    color:#707070;
+    margin-top:40px;
+    font-size:14px;
+    line-height:26px;
+
+
+}
+
+.icon {
+position:absolute;
+top:-15px;
+left:calc(50% - 23px );
+    font-size: 30px;
+    background-color:var(--secondary-accent-color);
+    color: var(--white-color);
+    border-radius:50%; 
+}
+
+@media only screen and (max-width: 600px) {
+    .our_job_wrapper{
+        display:flex;
+        flex-direction:column;
+width:95%;
+    }
+    .our_job_box{
+    width:100%;
+    padding:20px;
+    margin-top:20px;
+    }
+
+
+}
