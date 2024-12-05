@@ -29,7 +29,7 @@ const NavBar = (): JSX.Element => {
     <div className={styles.nav_bar__wrapper}>
      <div className={styles.mobile_logo_overview}>
       <div className={styles.main_header_logo__place}>
-        <Link to="/"><span>M</span>anagemento</Link>
+        <Link to="/"><img src="../../../../assets/images/oman_labor_market_intelligence_analysis_logo.png" alt="Brand Logo" /></Link>
       </div>
 {    isMobile  &&   <button onClick={() =>setIsDropdownVisible(!isDropdownVisible)}> {isDropdownVisible ? <IoClose /> : <IoMdMenu /> }</button>}
 </div>
@@ -41,7 +41,7 @@ const NavBar = (): JSX.Element => {
             </li>
           ))}
           <li className={styles.get_started}>
-            <Link to="/signup">Pricing + Sign up</Link>
+            <Link to="/signup">Sign up</Link>
           </li>
         </ul>
       </div>}
