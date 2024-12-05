@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const JobSchema = require("../models/jobSchema");
 
-export class jobRepository
+export class JobRepository
 {
     constructor() { }
 
