@@ -1,0 +1,5 @@
+.container {
+	display: flex;
+	margin: 50px 100px;
+	background-color: #fffcf9;
+}
