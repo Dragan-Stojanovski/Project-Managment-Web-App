@@ -25,6 +25,6 @@ const JobSchema = new mongoose.Schema({
     sub_sector: { type: mongoose.Schema.Types.ObjectId, ref: 'SubSector' }
   });
 
-jobSchema.index({ title: 'text' });
+JobSchema.index({ title: 'text' });
   
 module.exports = mongoose.model("JobSchema", JobSchema);

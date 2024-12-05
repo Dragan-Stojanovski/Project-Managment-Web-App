@@ -1,11 +1,10 @@
-
 const express = require("express");
-const multer = require("multer");
 const router = express.Router();
 const {register,login} = require('./controllers/user/authController');
 const {getUserOwnData} = require('./controllers/user/userController');
 const authenticateToken = require("./services/middlewares/authenticateToken");
-import { jobImport } from "./controllers/job/jobController";
+const {jobImport} =  require("./controllers/job/jobController");
+const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
 router.post('/register', register)
