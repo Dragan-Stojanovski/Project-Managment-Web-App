@@ -1,0 +1,114 @@
+.how_we_help_you_section__container{
+    padding-top:120px;
+    padding-bottom:120px;
+    margin-top:120px;
+    background-color:#FAFAFA;
+}
+
+.how_we_help_you_section__wrapper{
+    width:70%;
+    margin:auto;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.border_element{
+border-bottom:3px solid var(--secondary-accent-color);
+
+margin-top:20px;  
+width:100px;
+}
+
+.how_we_help_you_section__box{
+    width:45%;
+}
+
+.how_we_help_you_section__second_box{
+    width:45%;
+    background-color:var(--secondary-black-color);
+    padding:30px;
+    box-sizing:border-box;
+    border-radius:var(--border-radius-8);
+}
+
+
+.how_we_help_you_section__box h3{
+    font-size:44px;
+    line-height:50px;
+    text-transform:uppercase;
+    color:var(--secondary-black-color);
+}
+
+
+.how_we_help_you_section__second_box h3  {
+    font-size:44px;
+    line-height:50px;
+    text-transform:uppercase;
+    color:var(--white-color);
+}
+
+.how_we_help_you_section__box p{
+    color:#707070;
+    margin-top:40px;
+    font-size:14px;
+    line-height:26px;
+margin-bottom:20px;
+}
+
+.how_we_help_you_section__second_box p{
+    color:var(--white-color);
+    font-size:14px;
+    line-height:26px;
+}
+
+.how_we_help_you_section__second_box ul{
+    list-style:none;
+    color: #dcdcdc;
+
+    font-weight:600;
+}
+
+.how_we_help_you_section__second_box ul li {
+    margin-top:10px;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .how_we_help_you_section__container{
+        padding-top:60px;
+        padding-bottom:60px;
+        margin-top:60px;
+        background-color:#FAFAFA;
+    }
+
+    
+    .how_we_help_you_section__wrapper{
+        width:95%;
+        margin:auto;
+        display:flex;
+        flex-direction:column;
+        justify-content: space-between;
+        align-items:center;
+    }
+    .how_we_help_you_section__box{
+        width:100%;
+    }
+    .how_we_help_you_section__second_box {
+        width:100%;
+        margin-top:20px;
+        padding:10px;
+    }
+
+    .how_we_help_you_section__second_box h3  {
+        font-size:26px;
+        line-height:40px;
+        color:var(--white-color);
+    }
+    .how_we_help_you_section__box h3{
+        font-size:36px;
+        line-height:40px;
+    }
+
+}

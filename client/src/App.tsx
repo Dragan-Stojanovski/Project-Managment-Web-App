@@ -7,6 +7,7 @@ import LoginPage from "./presentation/pages/login-page";
 import Map from "./presentation/pages/career-map-page/Map";
 import Import from "./presentation/pages/import-page/Import";
 import { useSelector } from "react-redux";
+import Footer from "./presentation/components/footer";
 
 function App() {
 	const location = useLocation();
@@ -29,6 +30,10 @@ function App() {
 				<Route path="/getstarted" element={<GetStarted />} />
 				<Route path="/import" element={<Import />} />
 			</Routes>
+			{location.pathname === "/signup" ||
+			location.pathname === "/signin" ? null : (
+			<Footer/>
+		)}
 		</>
 	);
 }
