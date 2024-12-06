@@ -7,6 +7,7 @@ import LoginPage from "./presentation/pages/login-page";
 import Map from "./presentation/pages/career-map-page/Map";
 import Import from "./presentation/pages/import-page/Import";
 import { useSelector } from "react-redux";
+import JobDetails from "./presentation/pages/job-details-page/JobDetails";
 import Footer from "./presentation/components/footer";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 				<Route path="/map" element={<Map />} />
 				<Route path="/getstarted" element={<GetStarted />} />
 				<Route path="/import" element={<Import />} />
+				<Route path="/job-details" element={<JobDetails />} />
 			</Routes>
 			{location.pathname === "/signup" ||
 			location.pathname === "/signin" ? null : (

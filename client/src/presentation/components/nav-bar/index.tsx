@@ -12,7 +12,7 @@ const NavBar = (): JSX.Element => {
 
 	const navItems = [
 		{ label: "What's New?", path: "/news" },
-		{ label: "Features", path: "/features" },
+		{ label: "Job Details", path: "/job-details" },
 		{ label: "Sign In", path: "/signin" },
 		{ label: "Career Map", path: "/map" },
 		{ label: "Import", path: "/import" },
