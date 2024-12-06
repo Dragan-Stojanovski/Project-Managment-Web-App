@@ -1,13 +1,12 @@
 const XLSX = require("xlsx");
+const mongoose = require("mongoose")
 
-// MongoDB Models
-const Sector = require("../models/sectorSchema");
-const HardSkill = require("../models/hardSkillSchema");
-const GenericSkill = require("../models/genericSkillSchema");
-const IndustrySpecificSkill = require("../models/industrySpecificSkillSchema");
-const Job = require("../models/jobSchema");
-
-// Multer setup for file uploads
+const Sector = require("../../models/sectorSchema");
+const SubSector = require("../../models/subSectorSchema");
+const HardSkill = require("../../models/hardSkillSchema");
+const GenericSkill = require("../../models/genericSkillSchema");
+const IndustrySpecificSkill = require("../../models/industrySpecificSkillSchema");
+const Job = require("../../models/jobSchema");
 
 exports.jobImport = async (req, res) => {
   if (!req.file) {
@@ -24,74 +23,79 @@ exports.jobImport = async (req, res) => {
 
     for (let i = 0; i < sheetNames.length; i++) {
         const worksheet = workbook.Sheets[sheetNames[i]];
-        const rows = XLSX.utils.sheet_to_json(worksheet, { header: 4 });
+        const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: null});
 
-        const sectorTitle = rows[0][1]
-        let sector = await Sector.findOneAndUpdate(
-            { title: sectorTitle },
+        const sectorTitle = rows[0][1];
+        await Sector.findOneAndUpdate(
             { title: sectorTitle },
             { upsert: true, new: true }
         );
 
         if (i === 0) {
-            await sector.subSectors.deleteMany();
+            await SubSector.deleteMany();
         }
 
-        const subSector = await sector.subSectors.create({
+        await SubSector.create({
             title: rows[1][1],
             description: rows[2][1],
         });
 
-        for (let row of data) {
-            // Create a job
-            await subSector.jobs.create({
-                title: row["Job Title"],
-                jobCategory: row["Job Category"],
-                jobRole: row["Job Role"],
-                jobRoleDefinition: row["Job Role Definition"],
-                genericWithinTheSector: row["Generic Within Sector"],
-                genericWithinTheSubSector: row["Generic Within Sub-Sector"],
-                duration: row["Duration"],
-                joiningTime: row["Joining Time"],
-                employmentShare: row["Employment Share"],
-                skillCategory: row["Skill Category"],
-                academicQualification: (row["Academic Qualification"] || "").split(/\r?\n|\r/),
-                subMajor: row["Sub Major"],
-                availability: row["Availability"],
-                hardSkills: (row["Hard Skills"] || "").split(/\r?\n|\r/),
-                interpersonalSkills: (row["Interpersonal Skills"] || "").split(/\r?\n|\r/),
-                industrySpecific: (row["Industry Specific Skills"] || "").split(/\r?\n|\r/),
-                genericSkills: (row["Generic Skills"] || "").split(/\r?\n|\r/),
-                technicalSkills: (row["Technical Skills"] || "").split(/\r?\n|\r/),
-                softSkills: (row["Soft Skills"] || "").split(/\r?\n|\r/),
-                reference: row["Reference"],
-                media: row["Media"],
-            });
-        
-            // Process skills
-            (row["Hard Skills"] || "").split(/\r?\n|\r/).forEach(async (skill) => {
-            const cleanedSkill = skill.replace(/\d+-/, "");
-            const hardSkill = await HardSkill.findOne({ title: cleanedSkill });
-            if (!hardSkill) missingHardSkills.push(cleanedSkill);
-            });
-        
-            (row["Generic Skills"] || "").split(/\r?\n|\r/).forEach(async (skill) => {
-            const cleanedSkill = skill.replace(/\d+-/, "");
-            const genericSkill = await GenericSkill.findOne({ title: cleanedSkill });
-            if (!genericSkill) missingGenericSkills.push(cleanedSkill);
-            });
-        
-            (row["Industry Specific Skills"] || "").split(/\r?\n|\r/).forEach(async (skill) => {
-            const cleanedSkill = skill.replace(/\d+-/, "");
-            const industrySpecificSkill = await IndustrySpecificSkill.findOne({
-                title: cleanedSkill,
-            });
-            if (!industrySpecificSkill)
-            {
-                missingIndustrySpecificSkills.push(cleanedSkill);
-            }
-            });
-        }
+        var rowsWithoutHeaders = rows.slice(4);
+        for (let row of rowsWithoutHeaders) {
+          if (Object.values(row).every(x => x == null || x == ''))
+          {
+            break;
+          }
+
+          // Create a job
+          await Job.create({
+            title: row[2],
+            job_category: row[1],
+            job_role: row[2],
+            job_role_definition: row[3] ?? '',
+            generic_within_the_sector: row[4],
+            generic_within_the_sub_sector: row[5],
+            duration: row[6],
+            joining_time: row[7],
+            employment_share: row[8],
+            skill_category: row[9],
+            academic_qualification: row[10]?.split(/\r?\n/) ?? '',
+            sub_major: row[11] ?? 'N/A',
+            availability: row[12],
+            hard_skills: row[13]?.split(/\r?\n/) ?? '',
+            interpersonal_skills: row[14]?.split(/\r?\n/) ?? '',
+            industry_specific: row[15]?.split(/\r?\n/) ?? '',
+            generic_skills: row[16]?.split(/\r?\n/) ?? '',
+            technical_skills: row[17]?.split(/\r?\n/) ?? '',
+            soft_skills: row[18]?.split(/\r?\n/) ?? '',
+            reference: row[19],
+            media: row[20]
+          });
+      
+          // Process skills
+          (row[13] || "").split(/\r?\n/).forEach(async (skill) => {
+              const cleanedSkill = skill.replace(/\d+-/, "");
+              const hardSkill = await HardSkill.findOne({ title: cleanedSkill });
+              if (!hardSkill) missingHardSkills.push(cleanedSkill);
+          });
+      
+          (row[16] || "").split(/\r?\n/).forEach(async (skill) => {
+              const cleanedSkill = skill.replace(/\d+-/, "");
+              const genericSkill = await GenericSkill.findOne({ title: cleanedSkill });
+              if (!genericSkill) missingGenericSkills.push(cleanedSkill);
+          });
+      
+          (row[15] || "").split(/\r?\n/).forEach(async (skill) => {
+              const cleanedSkill = skill.replace(/\d+-/, "");
+              const industrySpecificSkill = await IndustrySpecificSkill.findOne({
+                  title: cleanedSkill,
+              });
+              if (!industrySpecificSkill)
+              {
+                  missingIndustrySpecificSkills.push(cleanedSkill);
+              }
+          });
+      }
     }
 
     const missingSkillsReport = {
@@ -109,7 +113,8 @@ exports.jobImport = async (req, res) => {
     } else {
       res.send("Data imported successfully.");
     }
-  } catch (err) {
+  }
+   catch (err) {
     console.error(err);
     res.status(500).send("Error importing data");
   }
