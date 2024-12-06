@@ -29,6 +29,7 @@ exports.jobImport = async (req, res) => {
 			});
 
 			const sectorTitle = rows[0][1];
+			console.log(sectorTitle);
 			await Sector.findOneAndUpdate(
 				{ title: sectorTitle },
 				{ upsert: true, new: true }
@@ -105,10 +106,6 @@ exports.jobImport = async (req, res) => {
 			missingGenericSkills: missingGenericSkills.join(","),
 			missingIndustrySpecificSkills: missingIndustrySpecificSkills.join(","),
 		};
-
-		console.log("missingHardSkills", missingHardSkills);
-		console.log("missingGenericSkills", missingGenericSkills);
-		console.log("missingIndustrySpecificSkills", missingIndustrySpecificSkills);
 
 		if (
 			missingHardSkills.length > 0 ||
