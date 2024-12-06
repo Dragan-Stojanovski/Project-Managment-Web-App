@@ -4,7 +4,8 @@ const { register, login } = require("./controllers/user/authController");
 const { getUserOwnData } = require("./controllers/user/userController");
 const authenticateToken = require("./services/middlewares/authenticateToken");
 const { jobImport } = require("./controllers/job/jobController");
-const { getJobRoles } = require("./controllers/job-roles/getJobRoles");
+const { getJobRoles } = require("./controllers/job-roles/jobRoles");
+const { getJobTitles } = require("./controllers/job-roles/jobRoles");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
@@ -13,5 +14,6 @@ router.post("/login", login);
 router.get("/userown", authenticateToken, getUserOwnData);
 router.post("/import", upload.single("file"), jobImport);
 router.get("/job-roles", getJobRoles);
+router.get("/job-titles", getJobTitles);
 
 module.exports = router;
