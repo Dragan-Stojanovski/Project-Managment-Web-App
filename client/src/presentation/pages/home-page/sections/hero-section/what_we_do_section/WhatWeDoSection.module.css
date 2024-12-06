@@ -2,6 +2,7 @@
     color:var(--secondary-black-color);
     text-align:center;
     font-size:44px;
+    text-transform:uppercase;
 }
 
 .what_we_do__wrapper p {
@@ -13,7 +14,7 @@
 }
 
 .what_we_do__container{
-    padding-top:60px;
+    padding-top:120px;
 }
 
 
@@ -23,11 +24,11 @@
     align-items:center;
 width:70%;
 margin:auto;
-margin-top:100px;
+margin-top:120px;
 }
 
 .our_job_box{
-width:25%;
+width:32%;
 padding:40px;
 border:1px solid var(--light-color);
 text-align:center;
@@ -38,6 +39,7 @@ box-sizing:border-box;
 .our_job_box h3{
     color:var(--secondary-black-color);
     margin-top:40px;
+    
 }
 
 .our_job_box p{
@@ -74,5 +76,12 @@ width:95%;
     .what_we_do__wrapper p {
         width:90%;
     }
+    .what_we_do__container{
+        padding-top:60px;
+    }
     
+.our_job_wrapper{
+margin-top:60px;
+}
+
 }
