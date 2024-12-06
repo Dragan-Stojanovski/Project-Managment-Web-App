@@ -4,7 +4,7 @@ const JobSchema = new mongoose.Schema({
     title: { type: String, required: true },
     job_category: { type: String, required: true },
     job_role: { type: String, required: true },
-    job_role_definition: { type: String, required: true },
+    job_role_definition: { type: String, required: false },
     generic_within_the_sector: { type: Boolean, default: true },
     generic_within_the_sub_sector: { type: Boolean, default: true },
     duration: { type: String, required: true },
@@ -25,6 +25,6 @@ const JobSchema = new mongoose.Schema({
     sub_sector: { type: mongoose.Schema.Types.ObjectId, ref: 'SubSector' }
   });
 
-jobSchema.index({ title: 'text' });
+JobSchema.index({ title: 'text' });
   
 module.exports = mongoose.model("JobSchema", JobSchema);

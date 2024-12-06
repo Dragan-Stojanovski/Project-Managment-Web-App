@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Import.module.css";
+import axios from "axios";
 
 const Import = (): JSX.Element => {
 	const [file, setFile] = useState<File | null>(null);
@@ -15,32 +16,16 @@ const Import = (): JSX.Element => {
 			alert("Please select a file to upload!");
 			return;
 		}
-
 		const formData = new FormData();
 		formData.append("file", file);
-
-		try {
-			const response = await fetch("https://your-backend-api.com/import", {
-				method: "POST",
-				body: formData,
-			});
-
-			if (!response.ok) {
-				throw new Error(`Error: ${response.statusText}`);
-			}
-
-			const data = await response.json();
-			console.log("File uploaded successfully:", data);
-		} catch (error) {
-			console.error("Error uploading file:", error);
-		}
+		await axios.post("http://localhost:3001/import", formData, { headers: {} });
 	};
 
 	return (
 		<>
 			<div className={styles.container}>
 				<h1>Import jobs</h1>
-				<input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+				<input type="file" onChange={handleFileChange} />
 				<button onClick={handleUpload}>Import</button>
 			</div>
 		</>
