@@ -4,16 +4,18 @@
     font-size:16px;
     font-weight:600;
     background-color:var(--secondary-accent-color);
-    border-radius:var(--border-radius-16);
+    border-radius:var(--border-radius-8);
     border:none;
     color:var(--white-color);
     cursor:pointer;
     border:2px solid var(--secondary-accent-color); 
+    height:48px;
+    box-sizing:border-box;
 
 }
 
 .base_button_wrapper:hover {
-    background-color: transparent;
+    background-color: #06d064;
     border:2px solid var(--secondary-accent-color); 
-    color: var(--secondary-accent-color);
+    box-shadow:var(--box-shadow);
   }

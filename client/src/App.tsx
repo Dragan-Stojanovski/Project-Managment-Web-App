@@ -7,7 +7,7 @@ import LoginPage from "./presentation/pages/login-page";
 import Map from "./presentation/pages/career-map-page/Map";
 import Import from "./presentation/pages/import-page/Import";
 import { useSelector } from "react-redux";
-import JobDetails from "./presentation/pages/job-details-page/JobDetails";
+import JobDetails from "./presentation/pages/job-details-page";
 import Footer from "./presentation/components/footer";
 
 function App() {

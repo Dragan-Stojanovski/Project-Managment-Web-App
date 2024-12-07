@@ -16,7 +16,7 @@ export interface IBaseTextFieldProps {
   name: string;
   label: string;
   testId: string;
-  control: Control;
+  control?: Control;
   rules?: RegisterOptions;
   placeholder?:string;
 }

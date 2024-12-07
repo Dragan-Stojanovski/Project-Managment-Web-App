@@ -1,0 +1,71 @@
+.tableWrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+  }
+  
+  .tableHeader {
+    background-color: #ffccd5; /* Pink background as in the image */
+    color: var(--black-color);
+    font-weight: bold;
+    text-align: left;
+    padding: 1rem;
+    font-size: 14px;
+  }
+  
+  .tableRow:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tableRow:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .tableCell {
+    padding: 1rem;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .tableCell:first-child {
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .detailsButton {
+    background-color: #ff6490; /* Pink button */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .detailsButton:hover {
+    background-color: #ff4875;
+  }
+  
+  .progressBar {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+  }
+  
+  .progressBar div {
+    width: 10px;
+    height: 10px;
+    background-color: lightgray;
+    border-radius: 2px;
+  }
+  
+  .progressBar div.filled {
+    background-color: #ff6490;
+  }
