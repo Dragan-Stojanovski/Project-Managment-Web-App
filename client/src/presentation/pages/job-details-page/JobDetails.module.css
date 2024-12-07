@@ -1,4 +1,29 @@
 .container {
-	display: flex;
-	margin: 50px 100px;
+  width: 70%;
+  margin: auto;
+}
+
+.tab_button__wrapper {
+  display: flex;
+  justify-content: left;
+  gap: 40px;
+  margin-top:40px;
+}
+
+.tab_button {
+  color: var(--light-black-color);
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding-bottom: 2px;
+  border-bottom: 3px solid var(--white-color);
+
+}
+
+.activeTabButton {
+  color: black;
+  padding-bottom: 2px;
+  border-bottom: 3px solid var(--secondary-accent-color);
 }

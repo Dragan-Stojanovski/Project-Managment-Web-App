@@ -1,0 +1,28 @@
+.container {
+    margin-top: 40px;
+  }
+  
+  .container h2 {
+    margin-bottom: 40px;
+    font-size: 44px;
+    color: var(--light-black-color);
+  }
+  
+
+.target_role__wrapper{
+    margin-top:40px;
+}
+
+.right_arrow_wrapper{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    font-size:50px;
+}
+
+
+.filters_wrapper {
+    background-color: var(--light-color);
+    padding: 20px;
+    margin-top: 40px;
+  }
