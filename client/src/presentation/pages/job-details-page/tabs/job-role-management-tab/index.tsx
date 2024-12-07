@@ -39,12 +39,13 @@ const JobRoleManagementTab =():JSX.Element => {
 
 
             <Grid item lg={3}>
-              <AutocompleteRoleField
+            <AutocompleteRoleField
                 label="Target Role"
-                name="currentRole"
+                name="targetRole"
                 control={control}
                 nullable={false}
               />
+
             </Grid>
 
             <Grid item lg={3}>
@@ -87,7 +88,7 @@ const JobRoleManagementTab =():JSX.Element => {
             <Grid item lg={3}>
               <AutocompleteSubSectorField
                 label="Sub Sector"
-                name="subSector"
+                name="subedector"
                 control={control}
                 nullable={false}
               />

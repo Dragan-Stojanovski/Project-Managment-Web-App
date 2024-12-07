@@ -16,11 +16,6 @@ interface IHookFormCountryAutocompleteFieldProps<
 /**
  * A React component for rendering an autocomplete field for selecting job roles,
  * integrated with `react-hook-form` and displaying job role titles.
- * @param additionalOptions - Additional options to include in the autocomplete field.
- * @param disableClearable - Whether to disable the clearable option based on the field value.
- * @param data - The data to be used by the autocomplete field (automatically provided).
- * @param disableClearable - Whether the field can be cleared.
- * @returns A `ReactElement` representing the job role autocomplete field.
  */
 const AutocompleteRoleField = <
   TFieldValues extends FieldValues,
@@ -28,7 +23,7 @@ const AutocompleteRoleField = <
 >({
   ...props
 }: IHookFormCountryAutocompleteFieldProps<TFieldValues, TFieldName>): ReactElement => {
-  const [jobRolesData, setJobRolesData] = useState<{ value: string; label: string }[] | null>(null);
+  const [jobRolesData, setJobRolesData] = useState<{ value: string; label: string }[]>([]); // Initialize with an empty array
 
   // Fetch job roles and update the state
   async function getJobRolesFn() {
@@ -48,7 +43,7 @@ const AutocompleteRoleField = <
   return (
     <BaseAutocompleteField<TFieldValues, TFieldName>
       {...props}
-      data={jobRolesData || []} // Use the mapped data for autocomplete
+      data={jobRolesData.length > 0 ? jobRolesData : []} // Ensure we pass an empty array if data is not ready
     />
   );
 };
