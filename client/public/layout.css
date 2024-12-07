@@ -1518,8 +1518,7 @@ a img {
 	right: 14px;
 	width: 15px;
 	height: 15px;
-	background: transparent url("../images/icon-plus-black.png") center center
-		no-repeat;
+	background: transparent url("/icon-plus-black.png") center center no-repeat;
 	background-size: 15px 15px;
 	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
@@ -1759,8 +1758,7 @@ a img {
 	top: 50%;
 	width: 17px;
 	height: 17px;
-	background: transparent url("../images/icon-plus-white.png") center center
-		no-repeat;
+	background: transparent url("/icon-plus-white.png") center center no-repeat;
 	background-size: 17px 17px;
 	right: 25px;
 	margin-top: -8px;
@@ -2010,15 +2008,13 @@ a img {
 }
 #map .map-row .row-label {
 	height: 200px;
-	background: #fff url("../images/line-vertical-gray.png") center center
-		repeat-y;
+	background: #fff url("/line-vertical-gray.png") center center repeat-y;
 }
 #map .map-row .row-label.entry {
-	background: #fff url("../images/line-vertical-gray.png") center -100px no-repeat;
+	background: #fff url("/line-vertical-gray.png") center -100px no-repeat;
 }
 #map .map-row .row-label.advanced {
-	background: #fff url("../images/line-vertical-gray.png") center 100px
-		no-repeat;
+	background: #fff url("/line-vertical-gray.png") center 100px no-repeat;
 }
 #map .map-row .row-label .title {
 	float: left;
@@ -2284,8 +2280,7 @@ a img {
 	right: 14px;
 	width: 15px;
 	height: 15px;
-	background: transparent url("../images/icon-plus-black.png") center center
-		no-repeat;
+	background: transparent url("/icon-plus-black.png") center center no-repeat;
 	background-size: 15px 15px;
 	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
@@ -2298,8 +2293,8 @@ a img {
 	display: block;
 	width: 0px;
 	height: 20px;
-	background: transparent url("../images/map-line-horizontal-white.png")
-		repeat-x left center;
+	background: transparent url("/map-line-horizontal-white.png") repeat-x left
+		center;
 	transform-origin: 0 center;
 	-webkit-transform-origin: 0 center;
 	-moz-transform-origin: 0 center;
