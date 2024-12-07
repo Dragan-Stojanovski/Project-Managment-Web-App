@@ -22,7 +22,7 @@ export interface IBaseTextFieldProps<T extends FieldValues> {
 	name: string;
 	label: string;
 	testId: string;
-	control: Control<T>;
+	control?: Control<T>;
 	rules?: Omit<
 		RegisterOptions<T, Path<T>>,
 		"setValueAs" | "disabled" | "valueAsNumber" | "valueAsDate"
