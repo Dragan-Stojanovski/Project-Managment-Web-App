@@ -140,8 +140,8 @@ const isNextDisabled = currentPage === Math.ceil(data.length / itemsPerPage) - 1
           >
             <Grid item lg={3}>
               <AutocompleteRoleField
-                label="Electrical Engineer"
-                name="electricalEngineer"
+                label="Role"
+                name="role"
                 control={control}
                 nullable={false}
               />
