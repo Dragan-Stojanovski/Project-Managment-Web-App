@@ -181,7 +181,7 @@ const isNextDisabled = currentPage === Math.ceil(data.length / itemsPerPage) - 1
             <Grid item lg={3}>
               <AutocompleteSubSectorField
                 label="Sub Sector"
-                name="subSector"
+                name="subsector"
                 control={control}
                 nullable={false}
               />

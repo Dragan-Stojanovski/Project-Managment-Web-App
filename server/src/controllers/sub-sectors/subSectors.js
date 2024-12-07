@@ -1,7 +1,7 @@
 const XLSX = require("xlsx");
 const mongoose = require("mongoose");
 
-const subSectors = require("../../models/jobSchema");
+const subSectors = require("../../models/subSectorSchema");
 
 exports.getSubSectors = async (req, res) => {
 	try {

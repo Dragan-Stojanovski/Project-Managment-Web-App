@@ -41,7 +41,7 @@ const JobRoleManagementTab =():JSX.Element => {
             <Grid item lg={3}>
               <AutocompleteRoleField
                 label="Target Role"
-                name="targetRole"
+                name="currentRole"
                 control={control}
                 nullable={false}
               />
