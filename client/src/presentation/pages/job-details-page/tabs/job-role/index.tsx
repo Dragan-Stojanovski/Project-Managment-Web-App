@@ -10,15 +10,16 @@ import AutocompleteMovementTypeField from "../../../../components/base-component
 import AutocompleteJobCategoryField from "../../../../components/base-components/autocomplete-jobcategory-field";
 import SliderComponent from "../../../../components/base-components/slider-component";
 import BaseTableComponent from "../../../../components/base-components/base-table-component";
-import { useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import JobRoleModalWindow from "./job-role-modal-window";
+import { IJob } from "../../../../../types/job-details/IGetJobRoles";
+import BaseModalWindow from "../../../../components/base-components/base-modal-window";
 const JobRoleTab = (): JSX.Element => {
-	const [selectedRowData, setSelectedRowData] = useState();
-	const handleDetailsClick = (rowData) => {
-		setSelectedRowData(rowData);
-		console.log("Row data:", rowData); // You can replace this with other actions
-	};
+    const [selectedRowData, setSelectedRowData] = useState<IRow | undefined>();
+    const handleDetailsClick = (rowData:IJob) => {
+        setSelectedRowData(rowData);
+      };
 
 	const columns = [
 		{
@@ -245,37 +246,27 @@ const JobRoleTab = (): JSX.Element => {
 
 						<Grid item lg={2}></Grid>
 
-						<Grid item lg={8}>
-							<SliderComponent name="matchingScore" control={control} />
-						</Grid>
-						<Grid item lg={2}></Grid>
-					</Grid>
-				</section>
-				<br></br>
-				<br></br>
-				<br></br>
-				<section>
-					{selectedRowData && (
-						<JobRoleModalWindow
-							onModalClose={() => setSelectedRowData(undefined)}
-							title={selectedRowData.jobRole}
-						>
-							{" "}
-							<h1>Modal Window</h1>{" "}
-						</JobRoleModalWindow>
-					)}
-					<h2>Job role mapping</h2>
-					<BaseTableComponent columns={columns} data={currentData} />
-					<div className={styles.paginationWrapper}>
-						<button
-							onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-							disabled={isBackDisabled}
-							className={`${styles.paginationButton} ${
-								isBackDisabled ? styles.disabled : ""
-							}`}
-						>
-							Back
-						</button>
+            <Grid item lg={8}>
+              <SliderComponent name="matchingScore" control={control} />
+            </Grid>
+            <Grid item lg={2}></Grid>
+          </Grid>
+        </section>
+        <br></br>
+        <br></br>
+        <br></br>
+        <section>
+           {selectedRowData &&  <BaseModalWindow onModalClose={() => setSelectedRowData(undefined)} title={selectedRowData.jobRole}> <h1>Modal Window</h1> </BaseModalWindow>}
+          <h2>Job role mapping</h2>
+          <BaseTableComponent columns={columns} data={currentData} />
+          <div className={styles.paginationWrapper}>
+          <button
+    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+    disabled={isBackDisabled}
+    className={`${styles.paginationButton} ${isBackDisabled ? styles.disabled : ""}`}
+  >
+    Back
+  </button>
 
 						<ReactPaginate
 							previousLabel={""}

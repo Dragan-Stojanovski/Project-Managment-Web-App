@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { FieldValues, Path } from 'react-hook-form';
 import BaseAutocompleteField, { IAutocompleteProps } from '../autocomplete';
 import { getSubSectors } from '../../../../infra/http/api-calls/sub-sectors/getSubSectors';
+import { ISubSector } from '../../../../types/sectors/IGetSubSectors';
 
 interface IHookFormCountryAutocompleteFieldProps<
   TFieldValues extends FieldValues,
@@ -26,20 +27,21 @@ const AutocompleteSubSectorField = <
   TFieldValues extends FieldValues,
   TFieldName extends Path<TFieldValues>
 >({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   nullable,
   ...props
 }: IHookFormCountryAutocompleteFieldProps<TFieldValues, TFieldName>): ReactElement => {
 
-  const [subSectorsData, setSubSectorsData] = useState<{ value: string; label: string }[]>([]);
+  const [subSectorsData, setSubSectorsData] = useState<ISubSector[] | []>([]);
 
   // Fetch sub-sectors and update the state
   async function getSubSectorsFn() {
     const result = await getSubSectors();
     console.log("Sub Sectors", result);
     setSubSectorsData(
-      result.data.map((subSector) => ({
-        value: subSector.title, // Use the title as the value and label
-        label: subSector.title, // Display the title in the autocomplete
+      result.data.map((subSector:ISubSector) => ({
+        value: subSector.title, 
+        label: subSector.title, 
       }))
     );
   }
@@ -51,7 +53,7 @@ const AutocompleteSubSectorField = <
   return (
     <BaseAutocompleteField<TFieldValues, TFieldName>
     nullable={false} {...props}
-    data={subSectorsData} // Pass the sub-sectors data to the autocomplete
+    data={subSectorsData}
     />
   );
 };
