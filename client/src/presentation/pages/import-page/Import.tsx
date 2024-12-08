@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Import.module.css";
 import axios from "axios";
+import BaseButton from "../../components/base-components/base-button";
 
 const Import = (): JSX.Element => {
 	const [file, setFile] = useState<File | null>(null);
@@ -22,13 +23,15 @@ const Import = (): JSX.Element => {
 	};
 
 	return (
-		<>
-			<div className={styles.container}>
-				<h1>Import jobs</h1>
-				<input type="file" onChange={handleFileChange} />
-				<button onClick={handleUpload}>Import</button>
-			</div>
-		</>
+		<div className={styles.container}>
+			<h1>Import jobs</h1>
+			<input type="file" onChange={handleFileChange} />
+			<BaseButton
+				type="submit"
+				onClick={handleUpload}
+				text="Import"
+			></BaseButton>
+		</div>
 	);
 };
 

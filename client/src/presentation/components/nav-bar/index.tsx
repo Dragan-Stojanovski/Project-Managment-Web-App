@@ -11,11 +11,11 @@ const NavBar = (): JSX.Element => {
 	);
 
 	const navItems = [
-		{ label: "What's New?", path: "/news" },
+		{ label: "Home", path: "/" },
 		{ label: "Job Details", path: "/job-details" },
-		{ label: "Sign In", path: "/signin" },
 		{ label: "Career Map", path: "/map" },
 		{ label: "Import", path: "/import" },
+		{ label: "Sign In", path: "/signin" },
 	];
 
 	useEffect(() => {
@@ -49,7 +49,7 @@ const NavBar = (): JSX.Element => {
 			</div>
 			{isDropdownVisible && (
 				<div>
-					<ul>
+					<ul className={styles.menu}>
 						{navItems.map((item) => (
 							<li key={item.label}>
 								<Link to={item.path}>{item.label}</Link>

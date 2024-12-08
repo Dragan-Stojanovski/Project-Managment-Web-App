@@ -206,7 +206,7 @@ const RegisterPage: React.FC = (): JSX.Element => {
 						</div>
 						<div className={styles.register_page_btn}></div>
 						<div className={styles.already_registered_msg}>
-							Already on E-commerce?<Link to="/login"> Sign in</Link>{" "}
+							Already on E-commerce?<Link to="/signin"> Sign in</Link>{" "}
 						</div>
 						<br></br>
 						<BaseButton type="submit" text="Register" />
