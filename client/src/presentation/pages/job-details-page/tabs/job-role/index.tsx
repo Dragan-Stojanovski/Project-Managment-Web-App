@@ -10,14 +10,15 @@ import AutocompleteMovementTypeField from "../../../../components/base-component
 import AutocompleteJobCategoryField from "../../../../components/base-components/autocomplete-jobcategory-field";
 import SliderComponent from "../../../../components/base-components/slider-component";
 import BaseTableComponent from "../../../../components/base-components/base-table-component";
-import { useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import JobRoleModalWindow from "./job-role-modal-window";
+import { IJob } from "../../../../../types/job-details/IGetJobRoles";
+import BaseModalWindow from "../../../../components/base-components/base-modal-window";
 const JobRoleTab = (): JSX.Element => {
-    const [selectedRowData, setSelectedRowData] = useState();
-    const handleDetailsClick = (rowData) => {
+    const [selectedRowData, setSelectedRowData] = useState<IRow | undefined>();
+    const handleDetailsClick = (rowData:IJob) => {
         setSelectedRowData(rowData);
-        console.log("Row data:", rowData); // You can replace this with other actions
       };
 
 
@@ -25,7 +26,7 @@ const JobRoleTab = (): JSX.Element => {
     {
       title: "Potential Progression",
       dataIndex: "jobRole",
-      render: (jobRole) => <strong>{jobRole}</strong>, // Styled text
+      render: (jobRole:string) => <strong>{jobRole}</strong>, // Styled text
     },
     {
       title: "Result",
@@ -255,7 +256,7 @@ const isNextDisabled = currentPage === Math.ceil(data.length / itemsPerPage) - 1
         <br></br>
         <br></br>
         <section>
-           {selectedRowData &&  <JobRoleModalWindow onModalClose={() => setSelectedRowData(undefined)} title={selectedRowData.jobRole}> <h1>Modal Window</h1> </JobRoleModalWindow>}
+           {selectedRowData &&  <BaseModalWindow onModalClose={() => setSelectedRowData(undefined)} title={selectedRowData.jobRole}> <h1>Modal Window</h1> </BaseModalWindow>}
           <h2>Job role mapping</h2>
           <BaseTableComponent columns={columns} data={currentData} />
           <div className={styles.paginationWrapper}>

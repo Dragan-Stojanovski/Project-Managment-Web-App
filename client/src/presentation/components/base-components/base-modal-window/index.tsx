@@ -1,14 +1,14 @@
 import React, { ReactNode } from 'react';
-import styles from './JobRoleModalWindow.module.css';
+import styles from './BaseModalWindow.module.css';
 
-interface JobRoleModalWindowProps {
-  children: ReactNode; // Define the type of children prop
+interface BaseModalWindowProps {
+  children: ReactNode; 
 title:string;
 onModalClose: () => void;
 }
 
 
-const JobRoleModalWindow: React.FC<JobRoleModalWindowProps> = ({ children, title,onModalClose }) => {
+const BaseModalWindow: React.FC<BaseModalWindowProps> = ({ children, title,onModalClose }) => {
   return (
     <>
     <div onClick={onModalClose} className={styles.backdrop}></div>
@@ -22,4 +22,4 @@ const JobRoleModalWindow: React.FC<JobRoleModalWindowProps> = ({ children, title
   );
 };
 
-export default JobRoleModalWindow;
+export default BaseModalWindow;
