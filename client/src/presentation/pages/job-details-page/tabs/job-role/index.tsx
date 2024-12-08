@@ -19,7 +19,6 @@ const JobRoleTab = (): JSX.Element => {
     const [selectedRowData, setSelectedRowData] = useState<IRow | undefined>();
     const handleDetailsClick = (rowData:IJob) => {
         setSelectedRowData(rowData);
-        console.log("Row data:", rowData); // You can replace this with other actions
       };
 
 	const columns = [
