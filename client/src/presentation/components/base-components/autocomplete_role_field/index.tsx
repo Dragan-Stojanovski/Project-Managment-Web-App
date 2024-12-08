@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { FieldValues, Path } from 'react-hook-form';
 import BaseAutocompleteField, { IAutocompleteProps } from '../autocomplete';
 import { getJobRoles } from '../../../../infra/http/api-calls/job-details/getJobRoles';
+import { IJob } from '../../../../types/job-details/IGetJobRoles';
 
 interface IHookFormCountryAutocompleteFieldProps<
   TFieldValues extends FieldValues,
@@ -23,13 +24,13 @@ const AutocompleteRoleField = <
 >({
   ...props
 }: IHookFormCountryAutocompleteFieldProps<TFieldValues, TFieldName>): ReactElement => {
-  const [jobRolesData, setJobRolesData] = useState<{ value: string; label: string }[]>([]); // Initialize with an empty array
+  const [jobRolesData, setJobRolesData] = useState<IJob[] | []>([]); // Initialize with an empty array
 
   // Fetch job roles and update the state
   async function getJobRolesFn() {
     const result = await getJobRoles();
     setJobRolesData(
-      result.data.map((role) => ({
+      result.data.map((role:IJob) => ({
         value: role.job_role, 
         label: role.job_role, 
       }))
