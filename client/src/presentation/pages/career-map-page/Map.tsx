@@ -1695,6 +1695,38 @@ const Map = (): JSX.Element => {
 								</div>
 							</div>
 							<div
+								className="point x10-architecture x30-new y10-high-advanced"
+								data-slug="scientist"
+								data-routes="registered-architect|building-performance-contractor-commercial|mep-contractor-with-green-building-expertise"
+								data-tooltips="This move requires significant experience and obtaining state licensing.|Extensive experience in building design, sustainable design and green construction is required.|Extensive experience in building design, sustainable design and green construction is required."
+							>
+								<a href="#" className="square">
+									<span className="border"></span>
+									<span className="dot"></span>
+								</a>
+								<div className="title">Building Scientist</div>
+								<div className="description">
+									<div className="description-screen"></div>
+									<div className="description-box">
+										<div className="description-title">Building Scientist</div>
+										<p>
+											Building Scientists conduct scientific research to better
+											understand the lifecycle of buildings from construction to
+											operation and maintenance to demolition or reuse.
+										</p>
+										<a
+											href="https://greenbuildingscareermap.org/jobs/building-scientist"
+											className="button"
+										>
+											Job Detail
+										</a>
+										<a href="#" className="close"></a>
+										<div className="arrow"></div>
+										<div className="arrow border"></div>
+									</div>
+								</div>
+							</div>
+							<div
 								className="point x10-architecture x30-right y20-mid-advanced"
 								data-slug="architectural-engineer"
 								data-routes="multifamily-retrofit-project-manager|mechanical-engineer|registered-architect|sustainable-construction-supervisor-leed-ap|commercial-construction-mgr-with-green-building-expertise|commercial-building-code-official-with-green-building-expertise|building-performance-contractor-commercial|building-scientist|building-performance-diagnostician|energy-engineer|facilities-manager|energy-manager"
@@ -2247,6 +2279,17 @@ const Map = (): JSX.Element => {
 							<div className="row-label entry">
 								<div className="title">
 									<span>Entry</span>
+								</div>
+							</div>
+							<div className="block entry architecture"></div>
+							<div className="block entry operations"></div>
+							<div className="block entry commercial"></div>
+							<div className="block entry residential"></div>
+						</div>
+						<div className="map-row">
+							<div className="row-label entry">
+								<div className="title">
+									<span>Test</span>
 								</div>
 							</div>
 							<div className="block entry architecture"></div>

@@ -2051,7 +2051,7 @@ a img {
 	position: absolute;
 	z-index: 200;
 	width: 91.5%;
-	height: 600px;
+	height: 800px;
 	margin-left: 3.75%;
 	margin-top: 0%;
 }
@@ -2066,16 +2066,19 @@ a img {
 	left: 0%;
 }
 #map .map-grid .point.x10-architecture.x20-center {
-	left: 8.3333%;
+	left: 6.3333%;
 }
 #map .map-grid .point.x10-architecture.x30-right {
-	left: 16.6666%;
+	left: 12.6666%;
+}
+#map .map-grid .point.x10-architecture.x30-new {
+	left: 18.6666%;
 }
 #map .map-grid .point.x20-operations.x10-left {
 	left: 25%;
 }
 #map .map-grid .point.x20-operations.x20-center {
-	left: 33.3333%;
+	left: 31.3333%;
 }
 #map .map-grid .point.x20-operations.x30-right {
 	left: 41.6666%;
@@ -2128,8 +2131,8 @@ a img {
 }
 #map .map-grid .point a.square {
 	display: block;
-	width: 33px;
-	height: 33px;
+	width: 23px;
+	height: 23px;
 }
 #map .map-grid .point a.square .dot {
 	position: absolute;
@@ -2137,6 +2140,8 @@ a img {
 	display: block;
 	background-color: #fff;
 	border-radius: 50%;
+	width: 23px !important;
+	height: 23px !important;
 }
 #map .map-grid .point.active {
 	z-index: 11;

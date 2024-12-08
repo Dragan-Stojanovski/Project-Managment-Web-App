@@ -84,8 +84,8 @@ const RegisterPage: React.FC = (): JSX.Element => {
 			<SetMetaInfo title="Register Page" description="Welcome Get Started" />
 
 			<div className={styles.register_page_container}>
-				<h1>Try Managemento for free</h1>
-				<h3>No credit card required - Cancel anytime</h3>
+				<h1>Oman Labor Market Analysis</h1>
+				<h3>Make your account</h3>
 				<div className={styles.register_page_wrapper}>
 					{successMsg && <div className={styles.success_msg}>{successMsg}</div>}
 					{errorMsg && successMsg === undefined && (
@@ -206,7 +206,7 @@ const RegisterPage: React.FC = (): JSX.Element => {
 						</div>
 						<div className={styles.register_page_btn}></div>
 						<div className={styles.already_registered_msg}>
-							Already on E-commerce?<Link to="/signin"> Sign in</Link>{" "}
+							Already have an account<Link to="/signin"> Sign in</Link>{" "}
 						</div>
 						<br></br>
 						<BaseButton type="submit" text="Register" />
