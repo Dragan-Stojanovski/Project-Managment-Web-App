@@ -2518,6 +2518,16 @@ a img {
 	padding: 0 0.5em;
 }
 
+#main {
+	margin-top: 60px;
+}
+
+#main .container .row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 /*--------------------------------------------------------------
 	Page Styles
 --------------------------------------------------------------*/
