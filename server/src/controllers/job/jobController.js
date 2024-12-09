@@ -28,12 +28,20 @@ exports.jobImport = async (req, res) => {
 				defval: null,
 			});
 
-			const sectorTitle = rows[0][1];
-			console.log(sectorTitle);
-			await Sector.findOneAndUpdate(
-				{ title: sectorTitle },
-				{ upsert: true, new: true }
-			);
+			const sectorTitle = rows[0][1]?.trim();
+
+			// Check if sectorTitle is valid
+			if (!sectorTitle || sectorTitle.length === 0) {
+				console.error("Sector title is empty or invalid");
+				continue;
+			}
+
+			try {
+				await Sector.create({ title: sectorTitle });
+				console.log("Sector created:", sectorTitle);
+			} catch (err) {
+				console.error("Error creating sector:", err.message);
+			}
 
 			if (i === 0) {
 				await SubSector.deleteMany();
@@ -73,6 +81,8 @@ exports.jobImport = async (req, res) => {
 					soft_skills: row[18]?.split(/\r?\n/) ?? "",
 					reference: row[19],
 					media: row[20],
+					sector: rows[0][1]?.trim(),
+					sub_sector: rows[1][1],
 				});
 
 				// Process skills

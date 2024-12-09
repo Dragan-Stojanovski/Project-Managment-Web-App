@@ -2007,21 +2007,29 @@ a img {
 	margin-bottom: -16px;
 }
 #map .map-row .row-label {
-	height: 200px;
-	background: #fff url("/line-vertical-gray.png") center center repeat-y;
+	height: 120px !important;
+	/*background: #fff url("/line-vertical-gray.png") center center repeat-y;*/
 }
+/*
 #map .map-row .row-label.entry {
 	background: #fff url("/line-vertical-gray.png") center -100px no-repeat;
 }
 #map .map-row .row-label.advanced {
-	background: #fff url("/line-vertical-gray.png") center 100px no-repeat;
-}
+	/*background: #fff url("/line-vertical-gray.png") center 100px no-repeat;
+}*/
 #map .map-row .row-label .title {
 	float: left;
 	width: 200px;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-transform: uppercase;
 	font-weight: 700;
+	font-size: 16px;
+	margin-top: 50px;
+	padding-left: 50px;
+	line-height: 20px !important;
+	/*
 	-moz-transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
@@ -2029,8 +2037,7 @@ a img {
 	-moz-transform-origin: top right;
 	-webkit-transform-origin: top right;
 	-ms-transform-origin: top right;
-	transform-origin: top right;
-	margin-left: -200px;
+	transform-origin: top right;*/
 }
 #map .map-row .row-label .title span {
 	background-color: #fff;
@@ -2129,10 +2136,13 @@ a img {
 #map .map-grid .point.y90-low-entry {
 	top: 88.8888%;
 }
+#map .map-grid .point.y110-low-entry {
+	top: 98.8888%;
+}
 #map .map-grid .point a.square {
 	display: block;
-	width: 23px;
-	height: 23px;
+	width: 20px;
+	height: 20px;
 }
 #map .map-grid .point a.square .dot {
 	position: absolute;
@@ -2140,8 +2150,8 @@ a img {
 	display: block;
 	background-color: #fff;
 	border-radius: 50%;
-	width: 23px !important;
-	height: 23px !important;
+	width: 20px !important;
+	height: 20px !important;
 }
 #map .map-grid .point.active {
 	z-index: 11;
@@ -2376,6 +2386,7 @@ a img {
 	position: relative;
 	float: left;
 	width: 24%;
+	height: 120px !important;
 }
 #map .map-row .block.advanced.residential {
 	background-color: #1a713f;
@@ -2524,7 +2535,7 @@ a img {
 }
 
 #main {
-	margin-top: 60px;
+	margin-top: 40px;
 }
 
 #main .container .row {

@@ -1,10 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const SectorSchema = new mongoose.Schema({
-  title: { type: String, required: true, unique: true },
-},
-{ timestamps: true });
+const SectorSchema = new mongoose.Schema(
+	{
+		title: { type: String, required: true },
+	},
+	{ timestamps: true }
+);
 
-SectorSchema.index({ title: 'text' });
+SectorSchema.index({ title: "text" });
 
-module.exports = mongoose.model('SectorSchema', SectorSchema);
+module.exports = mongoose.model("SectorSchema", SectorSchema);
