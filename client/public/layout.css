@@ -2026,7 +2026,7 @@ a img {
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 16px;
-	margin-top: 50px;
+	margin-top: 40px;
 	padding-left: 50px;
 	line-height: 20px !important;
 	/*
@@ -2073,72 +2073,81 @@ a img {
 	left: 0%;
 }
 #map .map-grid .point.x10-architecture.x20-center {
-	left: 6.3333%;
+	left: 5%;
 }
 #map .map-grid .point.x10-architecture.x30-right {
-	left: 12.6666%;
+	left: 10%;
 }
 #map .map-grid .point.x10-architecture.x30-new {
-	left: 18.6666%;
+	left: 15%;
 }
+
 #map .map-grid .point.x20-operations.x10-left {
 	left: 25%;
 }
 #map .map-grid .point.x20-operations.x20-center {
-	left: 31.3333%;
+	left: 30%;
 }
 #map .map-grid .point.x20-operations.x30-right {
-	left: 41.6666%;
+	left: 35%;
 }
+
 #map .map-grid .point.x30-commercial.x10-left {
 	left: 50%;
 }
 #map .map-grid .point.x30-commercial.x20-center {
-	left: 58.3333%;
+	left: 55%;
 }
 #map .map-grid .point.x30-commercial.x30-right {
-	left: 66.6666%;
+	left: 60%;
 }
+
 #map .map-grid .point.x40-residential.x10-left {
 	left: 75%;
 }
 #map .map-grid .point.x40-residential.x20-center {
-	left: 83.3333%;
+	left: 80%;
 }
 #map .map-grid .point.x40-residential.x30-right {
-	left: 91.6666%;
+	left: 85%;
 }
 
+/* ---------------------------------------------------- */
+
 #map .map-grid .point.y10-high-advanced {
-	top: 0%;
+	top: -0.5%;
 }
 #map .map-grid .point.y20-mid-advanced {
-	top: 11.1111%;
+	top: 5.5%;
 }
 #map .map-grid .point.y30-low-advanced {
-	top: 22.2222%;
+	top: 11%;
 }
+
 #map .map-grid .point.y40-high-midlevel {
-	top: 33.3333%;
+	top: 19.5%;
 }
 #map .map-grid .point.y50-mid-midlevel {
-	top: 44.4444%;
+	top: 25%;
 }
 #map .map-grid .point.y60-low-midlevel {
-	top: 55.5555%;
+	top: 30.5%;
 }
+
 #map .map-grid .point.y70-high-entry {
-	top: 66.6666%;
+	top: 38.5%;
 }
 #map .map-grid .point.y80-mid-entry {
-	top: 77.7777%;
+	top: 44%;
 }
 #map .map-grid .point.y90-low-entry {
-	top: 88.8888%;
+	top: 49.5%;
 }
+
 #map .map-grid .point.y110-low-entry {
 	top: 98.8888%;
 }
+
 #map .map-grid .point a.square {
 	display: block;
 	width: 20px;
@@ -2483,6 +2492,19 @@ a img {
 #map .map-grid .point.x10-architecture.y80-mid-entry a.square .dot.dimmed,
 #map .map-grid .point.x10-architecture.y90-low-entry a.square .dot.dimmed {
 	background-color: #e0efb9;
+}
+
+#map .map-row .block.safety.planning {
+	background-color: #e3f5b5;
+}
+#map .map-row .block.safety.construction {
+	background-color: #bdf0e4;
+}
+#map .map-row .block.safety.connection {
+	background-color: #9edcbc;
+}
+#map .map-row .block.safety.maintenance {
+	background-color: #6bb190;
 }
 
 #map .map-row .col-label {
