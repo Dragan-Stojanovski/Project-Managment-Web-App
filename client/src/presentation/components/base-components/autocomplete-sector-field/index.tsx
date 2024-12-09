@@ -1,8 +1,10 @@
 // Copyright (c) MakEntWin Ltd. 2024 All rights reserved.
 
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { FieldValues, Path } from 'react-hook-form';
 import BaseAutocompleteField, { IAutocompleteProps } from '../autocomplete';
+import { ISectorsResponse } from '../../../../types/sectors/IGetSectors';
+import { getSectors } from '../../../../infra/http/api-calls/sectors/getSectors';
 
 
 interface IHookFormCountryAutocompleteFieldProps<
@@ -34,17 +36,26 @@ const AutocompleteSectorField = <
   TFieldValues,
   TFieldName
 >): ReactElement => {
+  const [sectorsData, setSectorsData] = useState<ISectorsResponse[] | []>([]);
+  async function getSectorsFn() {
+    const result = await getSectors();
+    console.log("Sub Sectors", result);
+    setSectorsData(
+      result.data.map((subSector:ISectorsResponse) => ({
+        value: subSector.title, 
+        label: subSector.title, 
+      }))
+    );
+  }
 
-const professionsData = [
-    { value: '1', label: 'Sector 1', tooltip: 'First option' },
-    { value: '2', label: 'Sector 2', tooltip: 'Second option' }
-  ];
-
+  useEffect(() => {
+    void getSectorsFn();
+  }, []);
 
   return (
     <BaseAutocompleteField<TFieldValues, TFieldName>
       {...props}
-      data={professionsData}
+      data={sectorsData}
     />
   );
 };
