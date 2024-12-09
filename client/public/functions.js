@@ -38,7 +38,6 @@ jQuery(function ($) {
 
 		// Binding Functions: Industry
 		$(".industry .tabs li a").click(function () {
-			report("[i] Industry tab #" + $(this).parent().index() + "clicked.");
 			if ($(this).hasClass("active")) {
 				$(".industry .tab-content .text").slideUp(250);
 				$(".industry .tabs li a.active").removeClass("active");
@@ -55,7 +54,7 @@ jQuery(function ($) {
 
 		// Binding Functions: Tooltips
 		$(".tooltipped .tooltip-toggle").click(function () {
-			report("[t] Tooltip clicked: " + $(this).parent().attr("data-slug"));
+			//report("[t] Tooltip clicked: " + $(this).parent().attr("data-slug"));
 			var obj_tooltip = $(this).parent().find(".tooltip");
 			if (obj_tooltip.is(":visible")) {
 				obj_tooltip.fadeOut(100);
@@ -72,7 +71,7 @@ jQuery(function ($) {
 
 		// Binding Functions: Route Items
 		$("#map .routes a.route-item").click(function () {
-			report("[→] Route item clicked: " + $(this).attr("data-slug"));
+			//report("[→] Route item clicked: " + $(this).attr("data-slug"));
 			resetPoints();
 
 			// Tab Action
@@ -93,7 +92,7 @@ jQuery(function ($) {
 			// Item Action
 			switch ($(this).attr("data-type")) {
 				case "careerPath":
-					report("[→] Plot career path: " + $(this).attr("data-careerpath"));
+					//report("[→] Plot career path: " + $(this).attr("data-careerpath"));
 					$("#map .map-grid").addClass("locked");
 					$("#map .map-grid").removeClass("with-titles");
 					$("#map .map-grid .point").removeClass("dimmed");
@@ -110,7 +109,7 @@ jQuery(function ($) {
 					break;
 
 				case "jobList":
-					report("[→] Plot job list: " + $(this).attr("data-joblist"));
+					//report("[→] Plot job list: " + $(this).attr("data-joblist"));
 					$("#map .map-grid").addClass("locked");
 					$("#map .map-grid").addClass("with-titles");
 					$("#map .map-grid .point").removeClass("dimmed");
@@ -183,9 +182,7 @@ jQuery(function ($) {
 					$(".guard").hide();
 					//deselectPoint($(this).parent());
 				} else {
-					report(
-						"[○] Point clicked to open: " + $(this).parent().attr("data-slug")
-					);
+					//report("[○] Point clicked to open: " + $(this).parent().attr("data-slug"));
 					$(".guard").show();
 					if ($("#map .map-grid .point.selected").length) {
 						deselectPoint($("#map .map-grid .point.selected"));
@@ -197,10 +194,7 @@ jQuery(function ($) {
 		});
 		$("#map .map-grid .point .description .description-box a.close").click(
 			function () {
-				report(
-					"[○] X clicked to close: " +
-						$(this).parent().parent().parent().attr("data-slug")
-				);
+				//report("[○] X clicked to close: " + $(this).parent().parent().parent().attr("data-slug"));
 				deselectPoint($(this).parent().parent().parent());
 				return false;
 			}
@@ -208,7 +202,7 @@ jQuery(function ($) {
 
 		$("body").removeClass("preload");
 
-		report("[•] Post-DOM Routine complete.");
+		//report("[•] Post-DOM Routine complete.");
 	});
 
 	/*  ==========================================================================
@@ -223,9 +217,11 @@ jQuery(function ($) {
 		$("#map .map-row .block").height(px_block_width);
 		$("#map .map-grid").width(px_block_width * int_block_total);
 		$("#map .map-grid").height(px_block_width * 3);
-		$("#map .map-grid .point a.square").width(px_block_width / int_block_total);
+		$("#map .map-grid .point a.square").width(
+			px_block_width / int_block_total / 2
+		);
 		$("#map .map-grid .point a.square").height(
-			px_block_width / int_block_total
+			px_block_width / int_block_total / 2
 		);
 		$("#map .map-grid .point a.square").css("marginTop", px_block_width / 24);
 		$("#map .map-grid .point a.square").css("marginLeft", px_block_width / 24);
@@ -233,8 +229,8 @@ jQuery(function ($) {
 		$("#map .map-grid .point a.square .dot").height(px_block_width / 6);
 		$("#map .map-grid .point a.square .dot").css("top", px_block_width / 12);
 		$("#map .map-grid .point a.square .dot").css("left", px_block_width / 12);
-		$("#map .map-grid .point a.square .border").width(px_block_width / 6);
-		$("#map .map-grid .point a.square .border").height(px_block_width / 6);
+		$("#map .map-grid .point a.square .border").width(px_block_width / 8);
+		$("#map .map-grid .point a.square .border").height(px_block_width / 8);
 		$("#map .map-grid .point a.square .border").css(
 			"top",
 			px_block_width / 12 - px_dotborder_width
@@ -338,7 +334,7 @@ jQuery(function ($) {
 		Map Functions
 		========================================================================== */
 	function plotPoint(slug_point, ms_delay) {
-		report("[○] plotPoint: " + slug_point);
+		//report("[○] plotPoint: " + slug_point);
 		array_timeouts[array_timeouts.length] = setTimeout(function () {
 			activatePoint(
 				$("#map .map-grid .point[data-slug='" + slug_point + "']"),
@@ -348,7 +344,7 @@ jQuery(function ($) {
 	}
 
 	function plotPathPoint(slug_point1, slug_point2, str_tooltip, ms_delay) {
-		report("[○] plotPathPoint: " + slug_point1 + " to " + slug_point2);
+		//report("[○] plotPathPoint: " + slug_point1 + " to " + slug_point2);
 		array_timeouts[array_timeouts.length] = setTimeout(function () {
 			activatePoint(
 				$("#map .map-grid .point[data-slug='" + slug_point1 + "']")
@@ -358,7 +354,7 @@ jQuery(function ($) {
 	}
 
 	function activatePoint(obj_point, bool_title) {
-		report("[○] activatePoint: " + obj_point.attr("data-slug"));
+		//report("[○] activatePoint: " + obj_point.attr("data-slug"));
 		$(
 			"#sidebar .subnav a[data-slug='" + obj_point.attr("data-slug") + "']"
 		).addClass("active");
@@ -368,8 +364,8 @@ jQuery(function ($) {
 		obj_point.find(".square .dot").height(px_block_width / 4);
 		obj_point.find(".square .dot").css("top", px_block_width / 24);
 		obj_point.find(".square .dot").css("left", px_block_width / 24);
-		obj_point.find(".square .border").width(px_block_width / 4);
-		obj_point.find(".square .border").height(px_block_width / 4);
+		obj_point.find(".square .border").width(px_block_width / 8);
+		obj_point.find(".square .border").height(px_block_width / 8);
 		obj_point
 			.find(".square .border")
 			.css("top", px_block_width / 24 - px_dotborder_width);
@@ -427,7 +423,6 @@ jQuery(function ($) {
 
 	function selectPoint(obj_point) {
 		activatePoint(obj_point);
-		console.log("SELECTING MAP", $("#map .map-grid"));
 		$("#map .map-grid").addClass("selected");
 		obj_point.addClass("selected");
 		$(
@@ -471,7 +466,7 @@ jQuery(function ($) {
 	}
 
 	function deselectPoint(obj_point) {
-		report("[○] deselectPoint: " + obj_point.attr("data-slug"));
+		//report("[○] deselectPoint: " + obj_point.attr("data-slug"));
 		$("#map .map-grid").removeClass("selected");
 		obj_point.removeClass("selected");
 		$(
@@ -486,7 +481,7 @@ jQuery(function ($) {
 	}
 
 	function drawLine(slug_point1, slug_point2, str_tooltip, ms_delay) {
-		report("[/] drawLine: " + slug_point1 + "-to-" + slug_point2);
+		//report("[/] drawLine: " + slug_point1 + "-to-" + slug_point2);
 		var obj_point1 = $(
 			"#map .map-grid .point[data-slug='" + slug_point1 + "']"
 		);
@@ -513,8 +508,8 @@ jQuery(function ($) {
 			.attr("data-slug", slug_point1 + "-to-" + slug_point2)
 			.css({
 				display: "block",
-				top: y_point1,
-				left: x_point1,
+				top: y_point1 - 10,
+				left: x_point1 - 10,
 				transform: "rotate(" + deg_angle + "deg)",
 			})
 			.animate({ width: px_length }, 500);
@@ -570,7 +565,7 @@ jQuery(function ($) {
 				$(this).show();
 			},
 			function () {
-				report("[/] Line tooltip hover off: " + $(this).attr("data-slug"));
+				//report("[/] Line tooltip hover off: " + $(this).attr("data-slug"));
 				$(
 					"#map .map-grid .line[data-slug='" + $(this).attr("data-slug") + "']"
 				).removeClass("active");

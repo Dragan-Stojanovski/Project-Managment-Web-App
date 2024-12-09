@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { getJobRoles } from "../../../infra/http/api-calls/job-details/getJobRoles";
+import { calculateJobMatchScore } from "../../../infra/utility/calculateJobMatchScore";
 
 const Map = (): JSX.Element => {
 	useEffect(() => {
@@ -18,7 +19,6 @@ const Map = (): JSX.Element => {
 
 	const getRoles = async () => {
 		const response = await getJobRoles();
-		console.log(response.data);
 	};
 
 	useEffect(() => {
@@ -2095,10 +2095,10 @@ const Map = (): JSX.Element => {
 									<span>Safety, Health Environment Security</span>
 								</div>
 							</div>
-							<div className="block entry architecture"></div>
-							<div className="block entry operations"></div>
-							<div className="block entry commercial"></div>
-							<div className="block entry residential"></div>
+							<div className="block safety planning"></div>
+							<div className="block safety construction"></div>
+							<div className="block safety connection"></div>
+							<div className="block safety maintenance"></div>
 						</div>
 						<div className="map-row">
 							<div className="row-label entry">
