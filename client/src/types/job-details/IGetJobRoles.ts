@@ -19,6 +19,7 @@ export interface IJob {
     soft_skills: string[];
     technical_skills: string[];
     reference?: string;
+    sector:string;
     media?: string;
     sub_sector: string; 
   }

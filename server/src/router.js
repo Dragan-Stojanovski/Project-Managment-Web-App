@@ -7,6 +7,7 @@ const { jobImport } = require("./controllers/job/jobController");
 const { getJobRoles } = require("./controllers/job-roles/jobRoles");
 const { getJobTitles } = require("./controllers/job-roles/jobRoles");
 const { getSubSectors } = require("./controllers/sub-sectors/subSectors");
+const { getSectors } = require("./controllers/sectors/sectors");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
@@ -17,5 +18,6 @@ router.post("/import", upload.single("file"), jobImport);
 router.get("/job-roles", getJobRoles);
 router.get("/job-titles", getJobTitles);
 router.get("/sub-sectors", getSubSectors);
+router.get("/sectors", getSectors);
 
 module.exports = router;
