@@ -425,9 +425,10 @@ jQuery(function ($) {
 		activatePoint(obj_point);
 		$("#map .map-grid").addClass("selected");
 		obj_point.addClass("selected");
-		$(
-			"#sidebar .subnav a[data-slug='" + obj_point.attr("data-slug") + "']"
-		).addClass("selected");
+		$("#map .map-grid").not(obj_point).removeClass("selected");
+		//$(
+		//	"#sidebar .subnav a[data-slug='" + obj_point.attr("data-slug") + "']"
+		//).addClass("selected");
 		obj_point.find(".title").stop().fadeOut(0);
 		obj_point.find(".description").css("display", "block");
 		// Description X Positioning
@@ -481,9 +482,11 @@ jQuery(function ($) {
 	}
 
 	function drawLine(slug_point1, slug_point2, str_tooltip, ms_delay) {
-		//report("[/] drawLine: " + slug_point1 + "-to-" + slug_point2);
-		var obj_point1 = $(
+		/*var obj_point1 = $(
 			"#map .map-grid .point[data-slug='" + slug_point1 + "']"
+		); */
+		var obj_point1 = $(
+			"#map .map-grid .point.selected[data-slug='" + slug_point1 + "']"
 		);
 		var y_point1 =
 			parseInt(obj_point1.css("top")) + px_block_width / 6 - px_line_width / 2;

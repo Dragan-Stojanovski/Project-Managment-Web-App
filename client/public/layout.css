@@ -1287,6 +1287,7 @@ a img {
 
 .vcenter {
 	display: block;
+	padding-top: 10px !important;
 }
 .y-center {
 	position: relative;
@@ -2078,8 +2079,11 @@ a img {
 #map .map-grid .point.x10-architecture.x30-right {
 	left: 10%;
 }
-#map .map-grid .point.x10-architecture.x30-new {
+#map .map-grid .point.x10-architecture.x40-new {
 	left: 15%;
+}
+#map .map-grid .point.x10-architecture.x40-newright {
+	left: 20%;
 }
 
 #map .map-grid .point.x20-operations.x10-left {
@@ -2112,7 +2116,7 @@ a img {
 	left: 85%;
 }
 
-/* ---------------------------------------------------- */
+/* -------------------- OLD OLD OLD-------------------------------- */
 
 #map .map-grid .point.y10-high-advanced {
 	top: -0.5%;
@@ -2144,9 +2148,152 @@ a img {
 	top: 49.5%;
 }
 
-#map .map-grid .point.y110-low-entry {
-	top: 98.8888%;
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ MY STYLES */
+/* +++++++++++++++++++++++++++++++++ X VALUES FOR TOP TOP TOP ++++++++++++++++++++++++++++++++++++ */
+#map .map-grid .point.x10-project.x10-left {
+	left: -0.5%;
 }
+#map .map-grid .point.x10-project.x20-center {
+	left: 4.5%;
+}
+#map .map-grid .point.x10-project.x30-right {
+	left: 9.5%;
+}
+#map .map-grid .point.x10-project.x40-new {
+	left: 14.5%;
+}
+#map .map-grid .point.x10-project.x50-newright {
+	left: 19.5%;
+}
+
+#map .map-grid .point.x20-construction.x10-left {
+	left: 24.5%;
+}
+#map .map-grid .point.x20-construction.x20-center {
+	left: 29.5%;
+}
+#map .map-grid .point.x20-construction.x30-right {
+	left: 34.5%;
+}
+#map .map-grid .point.x20-construction.x40-new {
+	left: 39.5%;
+}
+#map .map-grid .point.x20-construction.x50-newright {
+	left: 44.5%;
+}
+
+#map .map-grid .point.x30-grid.x10-left {
+	left: 49.5%;
+}
+#map .map-grid .point.x30-grid.x20-center {
+	left: 54.5%;
+}
+#map .map-grid .point.x30-grid.x30-right {
+	left: 59.5%;
+}
+#map .map-grid .point.x30-grid.x40-new {
+	left: 64.5%;
+}
+#map .map-grid .point.x30-grid.x50-newright {
+	left: 69.5%;
+}
+
+#map .map-grid .point.x40-operations.x10-left {
+	left: 74.5%;
+}
+#map .map-grid .point.x40-operations.x20-center {
+	left: 79.5%;
+}
+#map .map-grid .point.x40-operations.x30-right {
+	left: 84.5%;
+}
+#map .map-grid .point.x40-operations.x40-new {
+	left: 89.5%;
+}
+#map .map-grid .point.x40-operations.x50-newright {
+	left: 94%;
+}
+/* +++++++++++++++++++++++++++++++++ Y VALUES FOR TOP TOP TOP ++++++++++++++++++++++++++++++++++++ */
+#map .map-grid .point.y10-high-management {
+	top: -0.5%;
+}
+#map .map-grid .point.y20-mid-management {
+	top: 5%;
+}
+#map .map-grid .point.y30-low-management {
+	top: 10.5%;
+}
+
+#map .map-grid .point.y40-high-engineering {
+	top: 19%;
+}
+#map .map-grid .point.y50-mid-engineering {
+	top: 25.5%;
+}
+#map .map-grid .point.y60-low-engineering {
+	top: 31%;
+}
+
+#map .map-grid .point.y70-high-planning {
+	top: 39.5%;
+}
+#map .map-grid .point.y80-mid-planning {
+	top: 45%;
+}
+#map .map-grid .point.y90-low-planning {
+	top: 50.5%;
+}
+
+#map .map-grid .point.y100-high-safety {
+	top: 59%;
+}
+#map .map-grid .point.y110-mid-safety {
+	top: 64.5%;
+}
+#map .map-grid .point.y120-low-safety {
+	top: 70%;
+}
+
+#map .map-grid .point.y130-high-supporting {
+	top: 78.5%;
+}
+#map .map-grid .point.y140-mid-supporting {
+	top: 84%;
+}
+#map .map-grid .point.y150-low-supporting {
+	top: 89.5%;
+}
+
+#map .map-grid .point.y160-high-construction {
+	top: 98%;
+}
+#map .map-grid .point.y170-mid-construction {
+	top: 103.5%;
+}
+#map .map-grid .point.y180-low-construction {
+	top: 109%;
+}
+
+#map .map-grid .point.y190-high-quality {
+	top: 117.5%;
+}
+#map .map-grid .point.y200-mid-quality {
+	top: 123%;
+}
+#map .map-grid .point.y210-low-quality {
+	top: 128.5%;
+}
+
+#map .map-grid .point.y220-high-operation {
+	top: 137%;
+}
+#map .map-grid .point.y230-mid-operation {
+	top: 142.5%;
+}
+#map .map-grid .point.y240-low-operation {
+	top: 148%;
+}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ MY STYLES */
 
 #map .map-grid .point a.square {
 	display: block;
@@ -2235,7 +2382,7 @@ a img {
 	background-color: #fff;
 	padding: 15px;
 	border-radius: 10px;
-	border: 4px solid #616161;
+	border: 4px solid #69b63d;
 }
 #map .map-grid .point .description .description-box .arrow {
 	z-index: 5;
@@ -2274,7 +2421,7 @@ a img {
 	margin-left: -16px;
 }
 #map .map-grid .point .description .description-box .description-title {
-	font-size: 0.875em;
+	font-size: 1em;
 	font-weight: 700;
 	padding-right: 20px;
 	margin-bottom: 10px;
@@ -2398,7 +2545,7 @@ a img {
 	height: 120px !important;
 }
 #map .map-row .block.advanced.residential {
-	background-color: #1a713f;
+	background-color: rgb(20, 80, 40);
 }
 #map .map-grid .point.x40-residential.y10-high-advanced a.square .dot.dimmed,
 #map .map-grid .point.x40-residential.y20-mid-advanced a.square .dot.dimmed,
@@ -2406,7 +2553,7 @@ a img {
 	background-color: #53956f;
 }
 #map .map-row .block.advanced.commercial {
-	background-color: #44bc7d;
+	background-color: rgb(30, 30, 120);
 }
 #map .map-grid .point.x30-commercial.y10-high-advanced a.square .dot.dimmed,
 #map .map-grid .point.x30-commercial.y20-mid-advanced a.square .dot.dimmed,
@@ -2414,7 +2561,7 @@ a img {
 	background-color: #73cd9e;
 }
 #map .map-row .block.advanced.operations {
-	background-color: #88cebd;
+	background-color: rgb(40, 60, 170);
 }
 #map .map-grid .point.x20-operations.y10-high-advanced a.square .dot.dimmed,
 #map .map-grid .point.x20-operations.y20-mid-advanced a.square .dot.dimmed,
@@ -2422,7 +2569,7 @@ a img {
 	background-color: #a6dace;
 }
 #map .map-row .block.advanced.architecture {
-	background-color: #c4e175;
+	background-color: rgb(20, 90, 120);
 }
 #map .map-grid .point.x10-architecture.y10-high-advanced a.square .dot.dimmed,
 #map .map-grid .point.x10-architecture.y20-mid-advanced a.square .dot.dimmed,
@@ -2430,7 +2577,7 @@ a img {
 	background-color: #d3e998;
 }
 #map .map-row .block.midlevel.residential {
-	background-color: #438f69;
+	background-color: rgb(40, 100, 60);
 }
 #map .map-grid .point.x40-residential.y40-high-midlevel a.square .dot.dimmed,
 #map .map-grid .point.x40-residential.y50-mid-midlevel a.square .dot.dimmed,
@@ -2438,7 +2585,7 @@ a img {
 	background-color: #72ab8f;
 }
 #map .map-row .block.midlevel.commercial {
-	background-color: #69c898;
+	background-color: rgb(40, 40, 130);
 }
 #map .map-grid .point.x30-commercial.y40-high-midlevel a.square .dot.dimmed,
 #map .map-grid .point.x30-commercial.y50-mid-midlevel a.square .dot.dimmed,
@@ -2446,7 +2593,7 @@ a img {
 	background-color: #8fd6b2;
 }
 #map .map-row .block.midlevel.operations {
-	background-color: #a0d8c9;
+	background-color: rgb(50, 70, 180);
 }
 #map .map-grid .point.x20-operations.y40-high-midlevel a.square .dot.dimmed,
 #map .map-grid .point.x20-operations.y50-mid-midlevel a.square .dot.dimmed,
@@ -2454,7 +2601,7 @@ a img {
 	background-color: #b8e2d7;
 }
 #map .map-row .block.midlevel.architecture {
-	background-color: #cfe692;
+	background-color: rgb(30, 100, 130);
 }
 #map .map-grid .point.x10-architecture.y40-high-midlevel a.square .dot.dimmed,
 #map .map-grid .point.x10-architecture.y50-mid-midlevel a.square .dot.dimmed,
@@ -2462,7 +2609,7 @@ a img {
 	background-color: #dbecad;
 }
 #map .map-row .block.entry.residential {
-	background-color: #5d9d7f;
+	background-color: rgb(60, 120, 80);
 }
 #map .map-grid .point.x40-residential.y70-high-entry a.square .dot.dimmed,
 #map .map-grid .point.x40-residential.y80-mid-entry a.square .dot.dimmed,
@@ -2470,7 +2617,7 @@ a img {
 	background-color: #86b69f;
 }
 #map .map-row .block.entry.commercial {
-	background-color: #7dd0a6;
+	background-color: rgb(50, 50, 140);
 }
 #map .map-grid .point.x30-commercial.y70-high-entry a.square .dot.dimmed,
 #map .map-grid .point.x30-commercial.y80-mid-entry a.square .dot.dimmed,
@@ -2478,7 +2625,7 @@ a img {
 	background-color: #9edcbc;
 }
 #map .map-row .block.entry.operations {
-	background-color: #addcd1;
+	background-color: rgb(60, 80, 190);
 }
 #map .map-grid .point.x20-operations.y70-high-entry a.square .dot.dimmed,
 #map .map-grid .point.x20-operations.y80-mid-entry a.square .dot.dimmed,
@@ -2486,7 +2633,7 @@ a img {
 	background-color: #c2e5dd;
 }
 #map .map-row .block.entry.architecture {
-	background-color: #d5e9a1;
+	background-color: rgb(40, 110, 140);
 }
 #map .map-grid .point.x10-architecture.y70-high-entry a.square .dot.dimmed,
 #map .map-grid .point.x10-architecture.y80-mid-entry a.square .dot.dimmed,
@@ -2495,16 +2642,64 @@ a img {
 }
 
 #map .map-row .block.safety.planning {
-	background-color: #e3f5b5;
+	background-color: rgb(50, 120, 150);
 }
 #map .map-row .block.safety.construction {
-	background-color: #bdf0e4;
+	background-color: rgb(70, 90, 200);
 }
 #map .map-row .block.safety.connection {
-	background-color: #9edcbc;
+	background-color: rgb(60, 60, 150);
 }
 #map .map-row .block.safety.maintenance {
-	background-color: #6bb190;
+	background-color: rgb(65, 130, 95);
+}
+#map .map-row .block.supporting.planning {
+	background-color: rgb(60, 130, 160);
+}
+#map .map-row .block.supporting.construction {
+	background-color: rgb(80, 100, 210);
+}
+#map .map-row .block.supporting.connection {
+	background-color: rgb(70, 70, 160);
+}
+#map .map-row .block.supporting.maintenance {
+	background-color: rgb(75, 140, 100);
+}
+#map .map-row .block.constr.planning {
+	background-color: rgb(70, 140, 170);
+}
+#map .map-row .block.constr.construction {
+	background-color: rgb(90, 110, 220);
+}
+#map .map-row .block.constr.connection {
+	background-color: rgb(80, 80, 170);
+}
+#map .map-row .block.constr.maintenance {
+	background-color: rgb(85, 150, 110);
+}
+#map .map-row .block.quality.planning {
+	background-color: rgb(80, 150, 180);
+}
+#map .map-row .block.quality.construction {
+	background-color: rgb(100, 120, 230);
+}
+#map .map-row .block.quality.connection {
+	background-color: rgb(90, 90, 180);
+}
+#map .map-row .block.quality.maintenance {
+	background-color: rgb(100, 160, 120);
+}
+#map .map-row .block.operations.planning {
+	background-color: rgb(90, 160, 190);
+}
+#map .map-row .block.operations.construction {
+	background-color: rgb(110, 130, 240);
+}
+#map .map-row .block.operations.connection {
+	background-color: rgb(100, 100, 190);
+}
+#map .map-row .block.operations.maintenance {
+	background-color: rgb(110, 170, 130);
 }
 
 #map .map-row .col-label {
