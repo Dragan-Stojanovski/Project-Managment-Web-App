@@ -6,21 +6,16 @@ import { Button, Grid2, Slider } from "@mui/material";
 import BasicSelect from "../../components/base-components/base-select/BasicSelect";
 import JobRoleTab from "./tabs/job-role";
 import JobRoleManagementTab from "./tabs/job-role-management-tab";
+import { IJob } from "../../../types/job-details/IGetJobRoles";
 
 const JobDetails = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState("jobRole");
 
-  const [jobRoles, setJobRoles] = useState([
-    { label: "Electircal Engineer" },
-    { label: "Software Engineer" },
-  ]);
+  const [selectedJob, setSelectedJob] = useState<IJob | null>(null); // State to hold the selected job
 
-  useEffect(() => {
-    // fetch all job roles on start
-  }, []);
-
-  const handleExplore = () => {
-    //
+  // Callback function to handle the selected job from the child
+  const handleSelectedJob = (job: IJob | null) => {
+    setSelectedJob(job);
   };
 
   return (
@@ -47,7 +42,7 @@ const JobDetails = (): JSX.Element => {
           </button>
         </div>
 
-        {activeTab === "jobRole" && <JobRoleTab />}
+        {activeTab === "jobRole" &&  <JobRoleTab onSelectJob={handleSelectedJob} />}
         {activeTab === "jobRoleManagement" && <JobRoleManagementTab />}
 
         {/* <h1>Job Details</h1>

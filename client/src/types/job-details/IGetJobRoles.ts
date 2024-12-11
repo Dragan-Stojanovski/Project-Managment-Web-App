@@ -22,4 +22,5 @@ export interface IJob {
     sector:string;
     media?: string;
     sub_sector: string; 
+    matchDetails?:string[];
   }
