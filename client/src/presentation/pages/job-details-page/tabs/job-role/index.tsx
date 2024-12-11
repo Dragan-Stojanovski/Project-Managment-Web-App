@@ -6,342 +6,472 @@ import styles from "./JobRole.module.css";
 import AutocompleteMajorField from "../../../../components/base-components/autocomplete-major-field";
 import AutocompleteSectorField from "../../../../components/base-components/autocomplete-sector-field";
 import AutocompleteSubSectorField from "../../../../components/base-components/autocomplete-subsector-field";
-import AutocompleteMovementTypeField from "../../../../components/base-components/autocomplete-movement-type";
-import AutocompleteJobCategoryField from "../../../../components/base-components/autocomplete-jobcategory-field";
 import SliderComponent from "../../../../components/base-components/slider-component";
 import BaseTableComponent from "../../../../components/base-components/base-table-component";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import JobRoleModalWindow from "./job-role-modal-window";
 import { IJob } from "../../../../../types/job-details/IGetJobRoles";
 import BaseModalWindow from "../../../../components/base-components/base-modal-window";
 import { getJobRoles } from "../../../../../infra/http/api-calls/job-details/getJobRoles";
-const JobRoleTab = (): JSX.Element => {
-	const { handleSubmit, control, watch } = useForm<any>({
-		mode: "onChange",
-	  });
-
-	const [selectedRowData, setSelectedRowData] = useState<IRow | undefined>();
-    const handleDetailsClick = (rowData:IJob) => {
-        setSelectedRowData(rowData);
-      };
-
-	  const selectedSector = useWatch({ control, name: "sector" }); // Watching the sector field
-const selectedSubSector = useWatch({ control, name: "sub_sector" }); // Watching the sub-sector field
-const selectedJobRole = useWatch({ control, name: "job_role" }); // Watching the job role field
-	  const [jobRolesData, setJobRolesData] = useState<IJob[] | []>([]);
-
-	  async function getJobRolesFn() {
-	
-	
-		const result = await getJobRoles();
-		setJobRolesData(result.data);
-		
-	  }
-	
-	  useEffect(() => {
-		void getJobRolesFn();
-	  // eslint-disable-next-line react-hooks/exhaustive-deps
-	  }, []); 
 
 
-	  // Filter the jobRolesData to find the selected job
-const findSelectedJob = (
-	sector: string,
-	subSector: string,
-	jobRole: string,
-	data: IJob[]
-  ): IJob | null => {
-	return data.find(
-	  (job) =>
-		job.sector === sector &&
-		job.sub_sector === subSector &&
-		job.job_role === jobRole
-	) || null;
+const JobRoleTab: React.FC= (): JSX.Element => {
+  const { handleSubmit, control, watch } = useForm<any>({
+    mode: "onChange",
+  });
+
+  const [selectedRowData, setSelectedRowData] = useState<IRow | undefined>();
+  const handleDetailsClick = (rowData: IJob) => {
+    setSelectedRowData(rowData);
   };
-  
-  const selectedJob = findSelectedJob(
-	selectedSector,
-	selectedSubSector,
-	selectedJobRole,
-	jobRolesData
+
+  const selectedSector = useWatch({ control, name: "sector" }); 
+  const selectedSubSector = useWatch({ control, name: "sub_sector" }); 
+  const selectedJobRole = useWatch({ control, name: "job_role" }); 
+  const [jobRolesData, setJobRolesData] = useState<IJob[] | []>([]);
+  const [filteredJobRolesData, setFilteredJobRolesData] = useState<IJob[] | []>(
+    []
   );
-  
-  if (!selectedJob) {
-	console.warn("No job found matching the selected criteria.");
-  } else {
-	console.log("Selected Job:", selectedJob);
+
+  async function getJobRolesFn() {
+    const result = await getJobRoles();
+    setJobRolesData(result.data);
+    setFilteredJobRolesData(result.data);
   }
+
+  useEffect(() => {
+    void getJobRolesFn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Filter the job roles data based on form values
+  const filterJobRoles = (formData: any) => {
+    let filteredData = jobRolesData;
+
+    console.log("filteredData----------", filteredData);
+    if (formData.major) {
+      filteredData = filteredData.filter((job) => job.major === formData.major);
+    }
+
+    if (formData.sector) {
+      filteredData = filteredData.filter(
+        (job) => job.sector === formData.sector
+      );
+    }
+
+    if (formData.subSector) {
+      filteredData = filteredData.filter(
+        (job) => job.sub_sector === formData.subSector
+      );
+    }
+
+    // Update filtered data state
+
+    setJobMatches(compareJobs(selectedJob, filteredData));
+    setFilteredJobRolesData(filteredData);
+  };
+
+  // Filter the jobRolesData to find the selected job
+  const findSelectedJob = (
+    sector: string,
+    subSector: string,
+    jobRole: string,
+    data: IJob[]
+  ): IJob | null => {
+    return (
+      data.find(
+        (job) =>
+          job.sector === sector &&
+          job.sub_sector === subSector &&
+          job.job_role === jobRole
+      ) || null
+    );
+  };
+
+  const selectedJob = findSelectedJob(
+    selectedSector,
+    selectedSubSector,
+    selectedJobRole,
+    jobRolesData
+  );
+
 
 
   const skillCategoryRankings = [
-	"Semi-skilled",
-	"Skilled",
-	"Technician",
-	"Professional",
+    "Semi-skilled",
+    "Skilled",
+    "Technician",
+    "Professional",
   ];
-  
+
   const calculateSkillCategoryMatch = (
-	originalSkillCategory: string,
-	targetSkillCategory: string
+    originalSkillCategory: string,
+    targetSkillCategory: string
   ): number => {
-	const originalRank = skillCategoryRankings.indexOf(originalSkillCategory);
-	const targetRank = skillCategoryRankings.indexOf(targetSkillCategory);
-	return originalRank >= targetRank ? 1 : 0;
+    const originalRank = skillCategoryRankings.indexOf(originalSkillCategory);
+    const targetRank = skillCategoryRankings.indexOf(targetSkillCategory);
+    return originalRank >= targetRank ? 1 : 0;
   };
 
   const academicQualificationRankings = [
-	"High School",
-	"Certificate",
-	"Diploma",
-	"Bachelor",
-	"Master",
-	"PhD",
+    "High School",
+    "Certificate",
+    "Diploma",
+    "Bachelor",
+    "Master",
+    "PhD",
   ];
-  
-  const calculateAcademicQualificationMatch = (
-	originalQualifications: string[],
-	targetQualifications: string[]
-  ): number => {
-	const highestOriginalRank = Math.max(
-	  ...originalQualifications.map((qual) =>
-		academicQualificationRankings.indexOf(qual)
-	  )
-	);
-	const highestTargetRank = Math.max(
-	  ...targetQualifications.map((qual) =>
-		academicQualificationRankings.indexOf(qual)
-	  )
-	);
-	return highestOriginalRank >= highestTargetRank ? 1 : 0;
-  };
 
+  const calculateAcademicQualificationMatch = (
+    originalQualifications: string[],
+    targetQualifications: string[]
+  ): number => {
+    const highestOriginalRank = Math.max(
+      ...originalQualifications.map((qual) =>
+        academicQualificationRankings.indexOf(qual)
+      )
+    );
+    const highestTargetRank = Math.max(
+      ...targetQualifications.map((qual) =>
+        academicQualificationRankings.indexOf(qual)
+      )
+    );
+    return highestOriginalRank >= highestTargetRank ? 1 : 0;
+  };
 
   const calculateSkillMatch = (
-	originalSkills: string[],
-	targetSkills: string[]
-  ): number => {
-	const commonSkills = originalSkills.filter((skill) =>
-	  targetSkills.includes(skill.toLowerCase())
-	);
-	return commonSkills.length / targetSkills.length || 0;
+    originalSkills: string[],
+    targetSkills: string[]
+  ): { matchedSkills: string[]; matchPercentage: number } => {
+    // Ensure both lists are cleaned (trimmed, lowercase)
+    const cleanedOriginalSkills = originalSkills.map((skill) =>
+      skill.trim().toLowerCase()
+    );
+    const cleanedTargetSkills = targetSkills.map((skill) =>
+      skill.trim().toLowerCase()
+    );
+
+    // Find common skills
+    const matchedSkills = cleanedOriginalSkills.filter((skill) =>
+      cleanedTargetSkills.includes(skill)
+    );
+    const matchPercentage =
+      matchedSkills.length / cleanedTargetSkills.length || 0;
+
+    return { matchedSkills, matchPercentage };
   };
 
-
   const calculateIndustrySpecificSkillMatch = (
-	originalSkills: string[],
-	targetSkills: string[]
+    originalSkills: string[],
+    targetSkills: string[]
   ): number => {
-	const commonIndustrySkills = originalSkills.filter((skill) =>
-	  targetSkills.includes(skill.toLowerCase())
-	);
-	return commonIndustrySkills.length / targetSkills.length || 0;
+    const commonIndustrySkills = originalSkills.filter((skill) =>
+      targetSkills.includes(skill.toLowerCase())
+    );
+    return commonIndustrySkills.length / targetSkills.length || 0;
   };
 
   const calculateFinalScore = (
-	x1: number,
-	x2: number,
-	x3: number,
-	x4: number,
-	weights = { w1: 0.25, w2: 0.25, w3: 0.25, w4: 0.25 }
+    x1: number,
+    x2: number,
+    x3: number,
+    x4: number,
+    weights = { w1: 0.25, w2: 0.25, w3: 0.25, w4: 0.25 }
   ): number => {
-	return weights.w1 * x1 + weights.w2 * x2 + weights.w3 * x3 + weights.w4 * x4;
+    return (
+      weights.w1 * x1 + weights.w2 * x2 + weights.w3 * x3 + weights.w4 * x4
+    );
   };
 
+  const calculateMatchingSkills = (selectedJob: IJob, job: IJob) => {
+    const hardSkillsMatch = calculateSkillMatch(
+      selectedJob.hard_skills,
+      job.hard_skills
+    );
+    const softSkillsMatch = calculateSkillMatch(
+      selectedJob.soft_skills,
+      job.soft_skills
+    );
+    const interpersonalSkillsMatch = calculateSkillMatch(
+      selectedJob.interpersonal_skills,
+      job.interpersonal_skills
+    );
+    const industrySpecificSkillsMatch = calculateSkillMatch(
+      selectedJob.industry_specific,
+      job.industry_specific
+    );
+    const genericSkillsMatch = calculateSkillMatch(
+      selectedJob.generic_skills,
+      job.generic_skills
+    );
 
+    // Return all matched skills and the match percentages
+    return {
+      hardSkills: hardSkillsMatch,
+      softSkills: softSkillsMatch,
+      interpersonalSkills: interpersonalSkillsMatch,
+      industrySpecificSkills: industrySpecificSkillsMatch,
+      genericSkills: genericSkillsMatch,
+    };
+  };
   const compareJobs = (
-	selectedJob: IJob,
-	jobRolesData: IJob[]
-  ): { job: IJob; score: number }[] => {
-	return jobRolesData
-	  .filter((job) => job !== selectedJob) // Exclude the selected job itself
-	  .map((job) => {
-		const x1 = calculateSkillCategoryMatch(
-		  selectedJob.skill_category,
-		  job.skill_category
-		);
-		const x2 = calculateAcademicQualificationMatch(
-		  selectedJob.academic_qualification,
-		  job.academic_qualification
-		);
-		const x3 = calculateSkillMatch(
-		  [...selectedJob.hard_skills, ...selectedJob.interpersonal_skills],
-		  [...job.hard_skills, ...job.interpersonal_skills]
-		);
-		const x4 = calculateIndustrySpecificSkillMatch(
-		  selectedJob.industry_specific,
-		  job.industry_specific
-		);
-  
-		const weights = job.industry_specific.length
-		  ? { w1: 0.25, w2: 0.25, w3: 0.25, w4: 0.25 }
-		  : { w1: 0.25, w2: 0.25, w3: 0.5, w4: 0 };
-  
-		const score = calculateFinalScore(x1, x2, x3, x4, weights);
-		return { job, score };
-	  })
-	  .sort((a, b) => b.score - a.score); 
+    selectedJob: IJob,
+    jobRolesData: IJob[]
+  ): { job: IJob; score: number; matchDetails: any }[] => {
+    return jobRolesData
+      .filter((job) => job !== selectedJob)
+      .map((job) => {
+        const matchCount = calculateMatchingSkills(selectedJob, job);
+
+        const x1 = calculateSkillCategoryMatch(
+          selectedJob.skill_category,
+          job.skill_category
+        );
+        const x2 = calculateAcademicQualificationMatch(
+          selectedJob.academic_qualification,
+          job.academic_qualification
+        );
+        const x3 = calculateSkillMatch(
+          [...selectedJob.hard_skills, ...selectedJob.interpersonal_skills],
+          [...job.hard_skills, ...job.interpersonal_skills]
+        ).matchPercentage;
+        const x4 = calculateIndustrySpecificSkillMatch(
+          selectedJob.industry_specific,
+          job.industry_specific
+        );
+
+        const weights = job.industry_specific.length
+          ? { w1: 0.25, w2: 0.25, w3: 0.25, w4: 0.25 }
+          : { w1: 0.25, w2: 0.25, w3: 0.5, w4: 0 };
+
+        const score = calculateFinalScore(x1, x2, x3, x4, weights);
+
+        return { job, score, matchDetails: matchCount };
+      })
+      .sort((a, b) => b.score - a.score);
   };
 
+  //   const jobMatches = compareJobs(selectedJob, jobRolesData);
 
-//   const jobMatches = compareJobs(selectedJob, jobRolesData);
+  const [jobMatches, setJobMatches] = useState<
+    { job: IJob; score: number; matchDetails: any }[]
+  >([]); // Type the state for jobMatches
 
+  const onSubmit = () => {
+    setJobMatches(compareJobs(selectedJob, filteredJobRolesData));
+  };
 
-const [jobMatches,setJobMatches] = useState([])
-const onSubmit = (() => {
- setJobMatches(compareJobs(selectedJob, jobRolesData));
-})
+  const onFilter = async (data: any) => {
+    await filterJobRoles(data);
+  };
 
-
-console.log("jobMatches:",jobMatches)
-const columns = [
-	{
-	  title: "Potential Progression",
-	  dataIndex: "jobRole",
-	  render: (jobRole: string) => <strong>{jobRole}</strong>, // Job role in bold
-	},
-	{
-	  title: "Result",
-	  dataIndex: "result",
-	  render: (progress: boolean[]) => (
-		<div style={{ display: "flex", gap: "2px" }}>
-		  {progress.map((filled, index) => (
-			<div
-			  key={index}
-			  style={{
-				width: "10px",
-				height: "10px",
-				backgroundColor: filled ? "var(--secondary-accent-color)" : "pink",
-				borderRadius: "2px",
-			  }}
-			></div>
-		  ))}
-		</div>
-	  ),
-	},
-	{
-	  title: "Summary",
-	  dataIndex: "summary",
-	},
-	{
-	  title: "See Details",
-	  dataIndex: "details",
-	  render: (_, rowData) => (
-		<button
-		  style={{
-			background: "var(--secondary-accent-color)",
-			cursor: "pointer",
-			border: "none",
-			padding: "5px 10px",
-			borderRadius: "5px",
-			color: "#fff",
-		  }}
-		  onClick={() => handleDetailsClick(rowData)} // Trigger details action
-		>
-		  Details
-		</button>
-	  ),
-	},
+  const columns = [
+    {
+      title: "Potential Progression",
+      dataIndex: "jobRole",
+      render: (jobRole: string) => <strong>{jobRole}</strong>, // Job role in bold
+    },
+    {
+      title: "Result",
+      dataIndex: "result",
+      render: (matchDetails: number) => {
+        const maxScore = 22; // Maximum possible score
+        const maxFields = 8; // Maximum number of fields (bars)
+        const filledFields = Math.round((matchDetails / maxScore) * maxFields); // Calculate filled fields based on percentage
+        const progressArray = Array.from(
+          { length: maxFields },
+          (_, index) => index < filledFields
+        );
+        return (
+          <div style={{ display: "flex", gap: "2px" }}>
+            {progressArray.map((filled, index) => (
+              <div
+                key={index}
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  backgroundColor: filled
+                    ? "var(--secondary-accent-color)"
+                    : "pink",
+                  borderRadius: "2px",
+                }}
+              ></div>
+            ))}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Summary",
+      dataIndex: "summary",
+    },
+    {
+      title: "See Details",
+      dataIndex: "details",
+      render: (_, rowData) => (
+        <button
+          style={{
+            background: "var(--secondary-accent-color)",
+            cursor: "pointer",
+            border: "none",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            color: "#fff",
+          }}
+          onClick={() => handleDetailsClick(rowData)} // Trigger details action
+        >
+          Details
+        </button>
+      ),
+    },
   ];
-  const calculateMatchProgress = (job: IJob) => {
-	// Combine hard and soft skills for better match calculation
-	const totalSkills = [...job.hard_skills, ...job.soft_skills]; 
-	const matchPercentage = 0.75; // Example match percentage
-	const matchedSkills = Math.round(matchPercentage * totalSkills.length); // Calculate matched skills
-	return new Array(matchedSkills).fill(true).concat(new Array(totalSkills.length - matchedSkills).fill(false)); // Return boolean array
+
+  const matchingScore = watch("matchingScore"); // Slider value (0–100)
+  const normalizedMatchingScore = matchingScore / 100; // Convert to 0–1 scale
+
+  console.log("Normalized Matching Score:", normalizedMatchingScore);
+
+  const data = jobMatches
+    .filter(({ score }) => score >= normalizedMatchingScore) // Filter by normalized score
+    .map(({ job, score, matchDetails }) => {
+      // Extracting matched skills from each category
+      const matchedHardSkills =
+        matchDetails?.hardSkills?.matchedSkills.length || 0;
+      const matchedInterpersonalSkills =
+        matchDetails?.interpersonalSkills?.matchedSkills.length || 0;
+      const matchedIndustrySpecificSkills =
+        matchDetails?.industrySpecificSkills?.matchedSkills.length || 0;
+      const matchedGenericSkills =
+        matchDetails?.genericSkills?.matchedSkills.length || 0;
+
+      // Total matched skills
+      const totalMatchedSkills =
+        matchedHardSkills +
+        matchedInterpersonalSkills +
+        matchedIndustrySpecificSkills +
+        matchedGenericSkills;
+
+      // Creating the data object
+      return {
+        jobRole: job.job_role,
+        result: totalMatchedSkills,
+        summary: `${totalMatchedSkills} / 22`, // Display matched skills in summary
+        score: score,
+        details: "",
+        matchDetails,
+      };
+    });
+
+  const itemsPerPage = 4; // Number of items per page
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // Calculate the current data to display
+  const offset = currentPage * itemsPerPage;
+  const currentData = data.slice(offset, offset + itemsPerPage);
+
+  // Handle page change
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected);
   };
-  
-  
-  const data = jobMatches.map(({ job, score }) => ({
-	jobRole: job.job_role, // Job role as before
-	result: calculateMatchProgress(job), // Calculate the progress based on skills
-	summary: `${score} / 1`, // Summary with the score
-	matchedSkills: "TestMatchedSkills", // Placeholder, adjust as needed
-	details: "", // Additional details if needed
-  }));
 
-	  
-	
-	const itemsPerPage = 4; // Number of items per page
-	const [currentPage, setCurrentPage] = useState(0);
+  const isBackDisabled = currentPage === 0;
+  const isNextDisabled =
+    currentPage === Math.ceil(data.length / itemsPerPage) - 1;
 
-	// Calculate the current data to display
-	const offset = currentPage * itemsPerPage;
-	const currentData = data.slice(offset, offset + itemsPerPage);
+  const maxSkills = {
+    hardSkills: 14,
+    softSkills: 8,
+    industrySpecificSkills: 3,
+  };
 
-	// Handle page change
-	const handlePageChange = ({ selected }: { selected: number }) => {
-		setCurrentPage(selected);
-	};
+  // Extract matched skills from the selected data
+  const matchedHardSkills =
+    selectedRowData?.matchDetails?.hardSkills?.matchedSkills.length || 0;
+  const matchedSoftSkills =
+    selectedRowData?.matchDetails?.interpersonalSkills?.matchedSkills.length ||
+    0;
+  const matchedIndustrySpecificSkills =
+    selectedRowData?.matchDetails?.industrySpecificSkills?.matchedSkills
+      .length || 0;
 
-	const isBackDisabled = currentPage === 0;
-	const isNextDisabled =
-		currentPage === Math.ceil(data.length / itemsPerPage) - 1;
+  // Function to generate the filled/unfilled bars based on the matched skills
+  const renderBars = (matchedSkills: number, maximumSkills: number) => {
+    const progressArray = Array.from(
+      { length: maximumSkills },
+      (_, index) => index < matchedSkills
+    );
 
-	return (
-		<div className={styles.container}>
-			{/* <section className={styles.jobRoleSection}>
-				<div>
-					<Grid
-						container
-						rowSpacing={{ xs: "10px", sm: "20px", md: "20px", lg: "20px" }}
-						columnSpacing={{ xs: "20px", sm: "40px", md: "40px", lg: "40px" }}
-					>
-						<Grid item lg={3}>
-							<AutocompleteRoleField
-								label="Role"
-								name="role"
-								control={control}
-								nullable={false}
-							/>
-						</Grid>
-						<Grid item lg={3}>
-							<BaseButton text={"Explore"} type={"submit"} />
-						</Grid>
-					</Grid>
-				</div>
-			</section> */}
-
-			<div className={styles.filters_wrapper}>
-				<section className={styles.criteria_filtering__wrapper}>
-					<h2>Criteria</h2>
-					<form onSubmit={(e) => e.preventDefault()}>
-					<Grid container rowSpacing={{ xs: "10px", sm: "20px", md: "20px", lg: "20px" }} columnSpacing={{ xs: "20px", sm: "40px", md: "40px", lg: "40px" }}>
-
-  <Grid item lg={3}>
-    <AutocompleteSectorField
-      label="Sector"
-      name="sector"
-      control={control}
-      nullable={false}
-    />
-  </Grid>
-  <Grid item lg={3}>
-    <AutocompleteSubSectorField
-      label="Sub Sector"
-      name="sub_sector"
-      control={control}
-      nullable={false}
-    />
-  </Grid>
-  <Grid item lg={3}>
-    <AutocompleteRoleField
-      label="Role"
-      name="job_role"
-      control={control}
-      nullable={false}
-      sector={selectedSector} 
-      subsector={selectedSubSector} 
-    />
-  </Grid>
-  <Grid item lg={3}>
-    <BaseButton onClick={() => onSubmit()} text={"Explore"} type={"submit"} />
-  </Grid>
-</Grid>
-  </form>
+    return (
+      <div style={{ display: "flex", gap: "2px" }}>
+        {progressArray.map((filled, index) => (
+          <div
+            key={index}
+            style={{
+              width: "30px" /* `${(100 / maximumSkills)}%` */, 
+              height: "20px",
+              backgroundColor: filled
+                ? "var(--secondary-accent-color)"
+                : "pink",
+              borderRadius: "2px",
+            }}
+          ></div>
+        ))}
+      </div>
+    );
+  };
 
 
-						{/* <Grid item lg={3}>
+
+  console.log("SelectedRowData--------------",selectedRowData)
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.filters_wrapper}>
+        <section className={styles.criteria_filtering__wrapper}>
+          <h2>Criteria</h2>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <Grid
+              container
+              rowSpacing={{ xs: "10px", sm: "20px", md: "20px", lg: "20px" }}
+              columnSpacing={{ xs: "20px", sm: "40px", md: "40px", lg: "40px" }}
+            >
+              <Grid item lg={3}>
+                <AutocompleteSectorField
+                  label="Sector"
+                  name="sector"
+                  control={control}
+                  nullable={false}
+                />
+              </Grid>
+              <Grid item lg={3}>
+                <AutocompleteSubSectorField
+                  label="Sub Sector"
+                  name="sub_sector"
+                  control={control}
+                  nullable={false}
+                />
+              </Grid>
+              <Grid item lg={3}>
+                <AutocompleteRoleField
+                  label="Role"
+                  name="job_role"
+                  control={control}
+                  nullable={false}
+                  sector={selectedSector}
+                  subsector={selectedSubSector}
+                />
+              </Grid>
+              <Grid item lg={3}>
+                <BaseButton
+                  onClick={() => onSubmit()}
+                  text={"Explore"}
+                  type={"submit"}
+                />
+              </Grid>
+            </Grid>
+          </form>
+
+          {/* <Grid item lg={3}>
 							<AutocompleteMovementTypeField
 								label="Movement Type"
 								name="movementType"
@@ -349,109 +479,153 @@ const columns = [
 								nullable={false}
 							/>
 						</Grid> */}
-					
-				</section>
-</div>
-				<br></br>
-				<br></br>
-				<br></br>
-				<div className={styles.filters_wrapper}>
-				<section className={styles.criteria_filtering__wrapper}>
-					<h2>Filter</h2>
-					<Grid
-						container
-						rowSpacing={{ xs: "10px", sm: "20px", md: "20px", lg: "20px" }}
-						columnSpacing={{ xs: "20px", sm: "40px", md: "40px", lg: "40px" }}
-					>
-						<Grid item lg={3}>
-							<AutocompleteMajorField
-								label="Major"
-								name="major"
-								control={control}
-								nullable={false}
-							/>
-						</Grid>
-
-						<Grid item lg={3}>
-							<AutocompleteSectorField
-								label="Sector"
-								name="sector"
-								control={control}
-								nullable={false}
-							/>
-						</Grid>
-						<Grid item lg={3}>
-							<AutocompleteSubSectorField
-								label="Sub Sector"
-								name="subSector"
-								control={control}
-								nullable={false}
-							/>
-						</Grid>
-
-						<Grid item lg={3}>
-							<AutocompleteJobCategoryField
-								label="Job Category"
-								name="jobCategory"
-								control={control}
-								nullable={false}
-							/>
-						</Grid>
-
-						<Grid item lg={2}></Grid>
-
-            <Grid item lg={8}>
-              <SliderComponent name="matchingScore" control={control} />
-            </Grid>
-            <Grid item lg={2}></Grid>
-          </Grid>
         </section>
+      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div className={styles.filters_wrapper}>
+        <section className={styles.criteria_filtering__wrapper}>
+          <h2>Filter</h2>
+          <form onSubmit={handleSubmit(onFilter)}>
+            <Grid
+              container
+              rowSpacing={{ xs: "10px", sm: "20px", md: "20px", lg: "20px" }}
+              columnSpacing={{ xs: "20px", sm: "40px", md: "40px", lg: "40px" }}
+            >
+              <Grid item lg={3}>
+                <AutocompleteMajorField
+                  label="Major"
+                  name="major"
+                  control={control}
+                  nullable={false}
+                />
+              </Grid>
+
+              <Grid item lg={3}>
+                <AutocompleteSectorField
+                  label="Sector"
+                  name="sector"
+                  control={control}
+                  nullable={false}
+                />
+              </Grid>
+
+              <Grid item lg={3}>
+                <AutocompleteSubSectorField
+                  label="Sub Sector"
+                  name="subSector"
+                  control={control}
+                  nullable={false}
+                />
+              </Grid>
+
+              <Grid item lg={3}>
+                <BaseButton
+                  onClick={() => {}}
+                  text="Filter"
+                  type="submit" // Trigger form submission
+                />
+              </Grid>
+
+              {/* <Grid item lg={3}>
+              <AutocompleteJobCategoryField
+                label="Job Category"
+                name="jobCategory"
+                control={control}
+                nullable={false}
+              />
+            </Grid> */}
+
+              <Grid item lg={2}></Grid>
+
+              <Grid item lg={8}>
+                <SliderComponent name="matchingScore" control={control} />
+              </Grid>
+              <Grid item lg={2}></Grid>
+            </Grid>
+          </form>
+        </section>
+
         <br></br>
         <br></br>
         <br></br>
-		</div>
-		<div className={styles.filters_wrapper}>
+      </div>
+      <div className={styles.filters_wrapper}>
         <section>
-           {selectedRowData &&  <BaseModalWindow onModalClose={() => setSelectedRowData(undefined)} title={selectedRowData.jobRole}> <h1>Modal Window</h1> </BaseModalWindow>}
+          {selectedRowData && (
+            <BaseModalWindow
+              onModalClose={() => setSelectedRowData(undefined)}
+              title={selectedRowData.jobRole}
+            >
+              <div>
+                {/* Matched Hard Skills */}
+                <div>
+                  <h4>Matched Hard Skills</h4>
+                  {renderBars(matchedHardSkills, maxSkills.hardSkills)}
+                  <span>{`${matchedHardSkills} / ${maxSkills.hardSkills}`}</span>
+                </div>
+
+                {/* Matched Soft Skills */}
+                <div>
+                  <h4>Matched Soft Skills</h4>
+                  {renderBars(matchedSoftSkills, maxSkills.softSkills)}
+                  <span>{`${matchedSoftSkills} / ${maxSkills.softSkills}`}</span>
+                </div>
+
+                {/* Matched Industry Specific Skills */}
+                <div>
+                  <h4>Matched Industry Specific Skills</h4>
+                  {renderBars(
+                    matchedIndustrySpecificSkills,
+                    maxSkills.industrySpecificSkills
+                  )}
+                  <span>{`${matchedIndustrySpecificSkills} / ${maxSkills.industrySpecificSkills}`}</span>
+                </div>
+              </div>
+            </BaseModalWindow>
+          )}
           <h2>Job role mapping</h2>
           <BaseTableComponent columns={columns} data={currentData} />
           <div className={styles.paginationWrapper}>
-          <button
-    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-    disabled={isBackDisabled}
-    className={`${styles.paginationButton} ${isBackDisabled ? styles.disabled : ""}`}
-  >
-    Back
-  </button>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+              disabled={isBackDisabled}
+              className={`${styles.paginationButton} ${
+                isBackDisabled ? styles.disabled : ""
+              }`}
+            >
+              Back
+            </button>
 
-						<ReactPaginate
-							previousLabel={""}
-							nextLabel={""}
-							pageCount={Math.ceil(data.length / itemsPerPage)}
-							onPageChange={handlePageChange}
-							forcePage={currentPage}
-							containerClassName={styles.pagination}
-							activeClassName={styles.activePage}
-						/>
+            <ReactPaginate
+              previousLabel={""}
+              nextLabel={""}
+              pageCount={Math.ceil(data.length / itemsPerPage)}
+              onPageChange={handlePageChange}
+              forcePage={currentPage}
+              containerClassName={styles.pagination}
+              activeClassName={styles.activePage}
+            />
 
-						<button
-							onClick={() =>
-								setCurrentPage((prev) =>
-									Math.min(prev + 1, Math.ceil(data.length / itemsPerPage) - 1)
-								)
-							}
-							disabled={isNextDisabled}
-							className={`${styles.paginationButton} ${
-								isNextDisabled ? styles.disabled : ""
-							}`}
-						>
-							Next
-						</button>
-					</div>
-				</section>
-			</div>
-		</div>
-	);
+            <button
+              onClick={() =>
+                setCurrentPage((prev) =>
+                  Math.min(prev + 1, Math.ceil(data.length / itemsPerPage) - 1)
+                )
+              }
+              disabled={isNextDisabled}
+              className={`${styles.paginationButton} ${
+                isNextDisabled ? styles.disabled : ""
+              }`}
+            >
+              Next
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 };
 
 export default JobRoleTab;
