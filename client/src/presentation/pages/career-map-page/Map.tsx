@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getJobRoles } from "../../../infra/http/api-calls/job-details/getJobRoles";
 import { JobRolePoints } from "./JobRolePoints";
 
 const Map = (): JSX.Element => {
@@ -19,16 +18,9 @@ const Map = (): JSX.Element => {
 		loadScripts();
 	}, [loadAgain]);
 
-	const getRoles = async () => {
-		const response = await getJobRoles();
-		setTimeout(() => {
-			setLoadAgain(true);
-		}, 100);
-	};
-
-	useEffect(() => {
-		void getRoles();
-	}, []);
+	setTimeout(() => {
+		setLoadAgain(true);
+	}, 500);
 
 	return (
 		<main id="main">

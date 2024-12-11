@@ -49,8 +49,6 @@ export const JobRolePoints = () => {
 
 	const getRoles = async () => {
 		const response = await getJobRoles();
-		//const firstThreeRoles = response.data.slice(0, 5);
-		//setJobRoles(firstThreeRoles);
 		setJobRoles(response.data);
 	};
 
@@ -88,7 +86,7 @@ export const JobRolePoints = () => {
 				jobRoles.forEach((otherJobRole: IJob) => {
 					if (jobRole.title !== otherJobRole.title) {
 						const similarScore = calculateJobMatchScore(jobRole, otherJobRole);
-						if (similarScore >= 3) {
+						if (similarScore >= 3.25) {
 							similarRoles.push(otherJobRole.title.trim());
 						}
 					}
