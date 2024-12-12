@@ -69,3 +69,89 @@
 .paginationButton.disabled {
     cursor: not-allowed;
   }
+
+
+
+  .category_container {
+    position: relative;
+  }
+  
+  
+  
+  
+  .matched_skills_wrapper ul li {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  
+  .matched_skills_wrapper ul {
+    margin: 0px !important;
+    padding: 10px;
+    height: auto;
+  }
+  
+  .matching_container {
+    position: absolute;
+    right: 15%;
+    top: 50px;
+   
+    width:40%;
+  }
+  
+  
+  .job_description_wrapper {
+    padding: 5px;
+  }
+  
+  .jobs_name__wrapper{
+    display:flex;
+    justify-content: space-between;
+    background-color:var(--light-color);
+  }
+  
+  .jobs_name__box{
+    width:50%;
+  }
+  
+  .jobs_name__box h3{
+    font-size:20px;
+    text-align:left;
+    width:100%;
+  }
+  
+  .jobs_name__box ul{
+    margin:0px;
+    padding:10px;
+  }
+  
+  .jobs_name__wrapper ul li{
+    text-decoration:none;
+    margin-bottom:20px;
+    list-style:none;
+    font-size:20px;
+  }
+  
+  .type_of_skill_box {
+    width:50%;
+    
+  }
+  
+  .type_of_skill_box h3 {
+    font-size:20px;
+    font-weight:900;
+    background-color:var(--secondary-accent-color);
+    width:100%;
+    padding:10px;
+    color:white;
+  }
+  
+  .category_wrapper {
+    margin-top:50px;
+  }
+  
+  .category_wrapper h2{
+  font-size:32px;
+  font-weight:600;
+  width:fit-content;
+  padding:10px;
+  }
