@@ -14,8 +14,7 @@ import { IJob } from "../../../../../types/job-details/IGetJobRoles";
 import BaseModalWindow from "../../../../components/base-components/base-modal-window";
 import { getJobRoles } from "../../../../../infra/http/api-calls/job-details/getJobRoles";
 
-
-const JobRoleTab: React.FC= (): JSX.Element => {
+const JobRoleTab: React.FC = (): JSX.Element => {
   const { handleSubmit, control, watch } = useForm<any>({
     mode: "onChange",
   });
@@ -25,13 +24,17 @@ const JobRoleTab: React.FC= (): JSX.Element => {
     setSelectedRowData(rowData);
   };
 
-  const selectedSector = useWatch({ control, name: "sector" }); 
-  const selectedSubSector = useWatch({ control, name: "sub_sector" }); 
-  const selectedJobRole = useWatch({ control, name: "job_role" }); 
+  console.log("selectedRowData--------------", selectedRowData);
+
+  const selectedSector = useWatch({ control, name: "sector" });
+  const selectedSubSector = useWatch({ control, name: "sub_sector" });
+  const selectedJobRole = useWatch({ control, name: "job_role" });
   const [jobRolesData, setJobRolesData] = useState<IJob[] | []>([]);
   const [filteredJobRolesData, setFilteredJobRolesData] = useState<IJob[] | []>(
     []
   );
+  const [showComparedData, setShowComparedData] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   async function getJobRolesFn() {
     const result = await getJobRoles();
@@ -95,7 +98,7 @@ const JobRoleTab: React.FC= (): JSX.Element => {
     jobRolesData
   );
 
-
+  console.log("selectedJob--------", selectedJob);
 
   const skillCategoryRankings = [
     "Semi-skilled",
@@ -401,13 +404,14 @@ const JobRoleTab: React.FC= (): JSX.Element => {
       (_, index) => index < matchedSkills
     );
 
+
     return (
       <div style={{ display: "flex", gap: "2px" }}>
         {progressArray.map((filled, index) => (
           <div
             key={index}
             style={{
-              width: "30px" /* `${(100 / maximumSkills)}%` */, 
+              width: "30px" /* `${(100 / maximumSkills)}%` */,
               height: "20px",
               backgroundColor: filled
                 ? "var(--secondary-accent-color)"
@@ -420,9 +424,77 @@ const JobRoleTab: React.FC= (): JSX.Element => {
     );
   };
 
-
-
-  console.log("SelectedRowData--------------",selectedRowData)
+  
+  const skillComparison = {
+    hardSkills: {
+      matches: selectedRowData?.matchDetails?.hardSkills.matchedSkills.filter(
+        (skill) => selectedJob.hard_skills.includes(skill)
+      ),
+      missing: selectedJob?.hard_skills.filter(
+        (skill) =>
+          !selectedRowData?.matchDetails.hardSkills.matchedSkills.includes(
+            skill
+          ) && skill
+      ),
+    },
+    softSkills: {
+      matches: selectedRowData?.matchDetails.softSkills.matchedSkills.filter(
+        (skill) => selectedJob.soft_skills.includes(skill)
+      ),
+      missing: selectedJob?.soft_skills.filter(
+        (skill) =>
+          !selectedRowData?.matchDetails.softSkills.matchedSkills.includes(
+            skill
+          ) && skill
+      ),
+    },
+    interpersonalSkills: {
+      matches:
+        selectedRowData?.matchDetails.interpersonalSkills.matchedSkills.filter(
+          (skill) => selectedJob.interpersonal_skills.includes(skill)
+        ),
+      missing: selectedJob?.interpersonal_skills.filter(
+        (skill) =>
+          !selectedRowData?.matchDetails.interpersonalSkills.matchedSkills.includes(
+            skill
+          ) && skill
+      ),
+    },
+    industrySpecificSkills: {
+      matches:
+        selectedRowData?.matchDetails.industrySpecificSkills.matchedSkills.filter(
+          (skill) => selectedJob?.industry_specific.includes(skill)
+        ),
+      missing: selectedJob?.industry_specific.filter(
+        (skill) =>
+          !selectedRowData?.matchDetails.industrySpecificSkills.matchedSkills.includes(
+            skill
+          ) && skill
+      ),
+    },
+    genericSkills: {
+      matches:
+        selectedRowData?.matchDetails.genericSkills.matchedSkills.filter(
+          (skill) => selectedJob?.generic_skills.includes(skill)
+        ),
+      missing: selectedJob?.generic_skills.filter(
+        (skill) =>
+          !selectedRowData?.matchDetails.genericSkills.matchedSkills.includes(
+            skill
+          ) && skill
+      ),
+    },
+  };
+  const handleCategoryClick = (category) => {
+    setActiveCategory(activeCategory === category ? null : category);
+  };
+  const categoryLabels = {
+    hardSkills: "Hard Skills",
+    softSkills: "Soft Skills",
+    interpersonalSkills: "Interpersonal Skills",
+    industrySpecificSkills: "Industry Specific Skills",
+    genericSkills: "Generic Skills",
+  };
 
   return (
     <div className={styles.container}>
@@ -484,6 +556,7 @@ const JobRoleTab: React.FC= (): JSX.Element => {
       <br></br>
       <br></br>
       <br></br>
+      {/*   {jobMatches.length >0 &&   */}{" "}
       <div className={styles.filters_wrapper}>
         <section className={styles.criteria_filtering__wrapper}>
           <h2>Filter</h2>
@@ -527,16 +600,6 @@ const JobRoleTab: React.FC= (): JSX.Element => {
                   type="submit" // Trigger form submission
                 />
               </Grid>
-
-              {/* <Grid item lg={3}>
-              <AutocompleteJobCategoryField
-                label="Job Category"
-                name="jobCategory"
-                control={control}
-                nullable={false}
-              />
-            </Grid> */}
-
               <Grid item lg={2}></Grid>
 
               <Grid item lg={8}>
@@ -551,79 +614,103 @@ const JobRoleTab: React.FC= (): JSX.Element => {
         <br></br>
         <br></br>
       </div>
-      <div className={styles.filters_wrapper}>
-        <section>
-          {selectedRowData && (
-            <BaseModalWindow
-              onModalClose={() => setSelectedRowData(undefined)}
-              title={selectedRowData.jobRole}
-            >
-              <div>
-                {/* Matched Hard Skills */}
-                <div>
-                  <h4>Matched Hard Skills</h4>
-                  {renderBars(matchedHardSkills, maxSkills.hardSkills)}
-                  <span>{`${matchedHardSkills} / ${maxSkills.hardSkills}`}</span>
-                </div>
+      {/*  } */}
+      {jobMatches.length > 0 && (
+        <div className={styles.filters_wrapper}>
+          <section>
+            {selectedRowData && (
+              <BaseModalWindow
+                onModalClose={() => setSelectedRowData(undefined)}
+                title={selectedRowData.jobRole}
+              >
+                {showComparedData ? (
+               <div> {Object.entries(skillComparison).map(([category, { matches, missing }]) => ( <div key={category} className={styles.category_wrapper}> <h2 onClick={() => handleCategoryClick(category)} style={{ cursor: "pointer", color: activeCategory === category ? "white" : "black", backgroundColor: activeCategory === category ? "var(--secondary-accent-color)" : "var(--light-color)" }} > {categoryLabels[category] || category} </h2> {activeCategory === category && ( <div className={styles.matching_container}> <div className={styles.jobs_name__wrapper}> <div className={styles.type_of_skill_box}> <h3>Matched Skills</h3> </div> <div className={styles.type_of_skill_box}> <h3>Missing Skills</h3> </div> </div> <div className={styles.jobs_name__wrapper}> <div className={styles.jobs_name__box}> {matches.length > 0 ? ( <ul> {matches.map((skill, index) => ( <li key={index}>{skill}</li> ))} </ul> ) : ( <p>No matched skills</p> )} </div> <div className={styles.jobs_name__box}> {missing.length > 0 ? ( <ul> {missing.map((skill, index) => ( <li key={index}>{skill}</li> ))} </ul> ) : ( <p>No missing skills</p> )} </div> </div> </div> )} </div> ))} </div>
+                ) : (
+                  <div>
+                    {/* Matched Hard Skills */}
+                    <div>
+                      <h4>Matched Hard Skills</h4>
+                      {renderBars(matchedHardSkills, maxSkills.hardSkills)}
+                      <span>{`${matchedHardSkills} / ${maxSkills.hardSkills}`}</span>
+                    </div>
 
-                {/* Matched Soft Skills */}
-                <div>
-                  <h4>Matched Soft Skills</h4>
-                  {renderBars(matchedSoftSkills, maxSkills.softSkills)}
-                  <span>{`${matchedSoftSkills} / ${maxSkills.softSkills}`}</span>
-                </div>
+                    {/* Matched Soft Skills */}
+                    <div>
+                      <h4>Matched Soft Skills</h4>
+                      {renderBars(matchedSoftSkills, maxSkills.softSkills)}
+                      <span>{`${matchedSoftSkills} / ${maxSkills.softSkills}`}</span>
+                    </div>
 
-                {/* Matched Industry Specific Skills */}
-                <div>
-                  <h4>Matched Industry Specific Skills</h4>
-                  {renderBars(
-                    matchedIndustrySpecificSkills,
-                    maxSkills.industrySpecificSkills
-                  )}
-                  <span>{`${matchedIndustrySpecificSkills} / ${maxSkills.industrySpecificSkills}`}</span>
-                </div>
-              </div>
-            </BaseModalWindow>
-          )}
-          <h2>Job role mapping</h2>
-          <BaseTableComponent columns={columns} data={currentData} />
-          <div className={styles.paginationWrapper}>
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-              disabled={isBackDisabled}
-              className={`${styles.paginationButton} ${
-                isBackDisabled ? styles.disabled : ""
-              }`}
-            >
-              Back
-            </button>
+                    {/* Matched Industry Specific Skills */}
+                    <div>
+                      <h4>Matched Industry Specific Skills</h4>
+                      {renderBars(
+                        matchedIndustrySpecificSkills,
+                        maxSkills.industrySpecificSkills
+                      )}
+                      <span>{`${matchedIndustrySpecificSkills} / ${maxSkills.industrySpecificSkills}`}</span>
+                    </div>
+                    <button
+                      onClick={() => setShowComparedData(true)}
+                      style={{
+                        background: "var(--secondary-accent-color)",
+                        cursor: "pointer",
+                        border: "none",
+                        padding: "5px 10px",
+                        borderRadius: "5px",
+                        color: "#fff",
+                        marginTop: "20px",
+                      }}
+                    >
+                      Compare
+                    </button>
+                  </div>
+                )}
+              </BaseModalWindow>
+            )}
+            <h2>Job role mapping</h2>
+            <BaseTableComponent columns={columns} data={currentData} />
+            <div className={styles.paginationWrapper}>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+                disabled={isBackDisabled}
+                className={`${styles.paginationButton} ${
+                  isBackDisabled ? styles.disabled : ""
+                }`}
+              >
+                Back
+              </button>
 
-            <ReactPaginate
-              previousLabel={""}
-              nextLabel={""}
-              pageCount={Math.ceil(data.length / itemsPerPage)}
-              onPageChange={handlePageChange}
-              forcePage={currentPage}
-              containerClassName={styles.pagination}
-              activeClassName={styles.activePage}
-            />
+              <ReactPaginate
+                previousLabel={""}
+                nextLabel={""}
+                pageCount={Math.ceil(data.length / itemsPerPage)}
+                onPageChange={handlePageChange}
+                forcePage={currentPage}
+                containerClassName={styles.pagination}
+                activeClassName={styles.activePage}
+              />
 
-            <button
-              onClick={() =>
-                setCurrentPage((prev) =>
-                  Math.min(prev + 1, Math.ceil(data.length / itemsPerPage) - 1)
-                )
-              }
-              disabled={isNextDisabled}
-              className={`${styles.paginationButton} ${
-                isNextDisabled ? styles.disabled : ""
-              }`}
-            >
-              Next
-            </button>
-          </div>
-        </section>
-      </div>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) =>
+                    Math.min(
+                      prev + 1,
+                      Math.ceil(data.length / itemsPerPage) - 1
+                    )
+                  )
+                }
+                disabled={isNextDisabled}
+                className={`${styles.paginationButton} ${
+                  isNextDisabled ? styles.disabled : ""
+                }`}
+              >
+                Next
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 };

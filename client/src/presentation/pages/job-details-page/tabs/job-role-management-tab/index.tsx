@@ -9,6 +9,13 @@ import { IJob } from "../../../../../types/job-details/IGetJobRoles";
 import { getJobRoles } from "../../../../../infra/http/api-calls/job-details/getJobRoles";
 import { useEffect, useState } from "react";
 
+const categoryLabels: Record<string, string> = {
+  hard_skills: "Hard Skills",
+  interpersonal_skills: "Interpersonal Skills", // Add other mappings as needed
+  industry_specific: "Industry Specific", // Add other mappings as needed
+  generic_skills: "Generic Skills", // Add other mappings as needed
+};
+
 const JobRoleManagementTab = (): JSX.Element => {
   const { handleSubmit, control } = useForm<any>({
     mode: "onChange",
@@ -190,7 +197,7 @@ const JobRoleManagementTab = (): JSX.Element => {
          </div>
    
       </section>
-      <section>
+      <section className={styles.category_container}>
       {skillComparison ? (
         Object.entries(skillComparison).map(
           ([category, { matches, missing }]) => (
@@ -199,38 +206,58 @@ const JobRoleManagementTab = (): JSX.Element => {
                 onClick={() => handleCategoryClick(category)} // Set active category on click
                 style={{
                   cursor: "pointer",
-                  color: activeCategory === category ? "blue" : "black",
+                  color: activeCategory === category ? "white" : "black",
+                  backgroundColor: activeCategory === category ? "var(--secondary-accent-color)" : "var(--light-color)",
                 }}
               >
-                {category}
+                       {categoryLabels[category] || category} {/* Fallback to category if no mapping */}
+
               </h2>
               {activeCategory === category && ( // Show only if the category is active
-                <div className={styles.matching_box}>
-                  <div>
-                    <h3>Matched Skills</h3>
-                    {matches.length > 0 ? (
-                      <ul>
-                        {matches.map((skill, index) => (
-                          <li key={index}>{skill}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>No matched skills</p>
-                    )}
-                  </div>
-                  <div>
-                    <h3>Missing Skills</h3>
-                    {missing.length > 0 ? (
-                      <ul>
-                        {missing.map((skill, index) => (
-                          <li key={index}>{skill}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>No missing skills</p>
-                    )}
-                  </div>
-                </div>
+<div className={styles.matching_container}>
+<div className={styles.jobs_name__wrapper}>
+  <div className={styles.type_of_skill_box}>
+<h3>Matched Skills</h3>
+</div>
+<div className={styles.type_of_skill_box}>
+<h3>Missing Skills</h3>
+</div>
+
+  </div>
+
+
+
+
+<div className={styles.jobs_name__wrapper}>
+<div className={styles.jobs_name__box}>
+     {matches.length > 0 ? (
+                       <ul>
+                         {matches.map((skill, index) => (
+                           <li key={index}>{skill}</li>
+                         ))}
+                       </ul>
+                     ) : (
+                       <p>No matched skills</p>
+                     )}
+   </div>
+<div className={styles.jobs_name__box}>
+  
+     {missing.length > 0 ? (
+                       <ul>
+                         {missing.map((skill, index) => (
+                           <li key={index}>{skill}</li>
+                         ))}
+                       </ul>
+                     ) : (
+                       <p>No missing skills</p>
+                     )}
+  
+   </div>
+
+
+  </div>
+  </div>
+       
               )}
             </div>
           )
