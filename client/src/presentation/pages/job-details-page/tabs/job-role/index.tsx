@@ -427,60 +427,50 @@ const JobRoleTab: React.FC = (): JSX.Element => {
   
   const skillComparison = {
     hardSkills: {
-      matches: selectedRowData?.matchDetails?.hardSkills.matchedSkills.filter(
-        (skill) => selectedJob.hard_skills.includes(skill)
-      ),
+      matches: selectedRowData?.matchDetails?.hardSkills.matchedSkills,
       missing: selectedJob?.hard_skills.filter(
         (skill) =>
           !selectedRowData?.matchDetails.hardSkills.matchedSkills.includes(
-            skill
+            skill.toLowerCase()
           ) && skill
       ),
     },
     softSkills: {
-      matches: selectedRowData?.matchDetails.softSkills.matchedSkills.filter(
-        (skill) => selectedJob.soft_skills.includes(skill)
-      ),
+      matches: selectedRowData?.matchDetails.softSkills.matchedSkills,
       missing: selectedJob?.soft_skills.filter(
         (skill) =>
           !selectedRowData?.matchDetails.softSkills.matchedSkills.includes(
-            skill
+            skill.toLowerCase()
           ) && skill
       ),
     },
     interpersonalSkills: {
       matches:
-        selectedRowData?.matchDetails.interpersonalSkills.matchedSkills.filter(
-          (skill) => selectedJob.interpersonal_skills.includes(skill)
-        ),
+        selectedRowData?.matchDetails.interpersonalSkills.matchedSkills,
       missing: selectedJob?.interpersonal_skills.filter(
         (skill) =>
           !selectedRowData?.matchDetails.interpersonalSkills.matchedSkills.includes(
-            skill
+            skill.toLowerCase()
           ) && skill
       ),
     },
     industrySpecificSkills: {
       matches:
-        selectedRowData?.matchDetails.industrySpecificSkills.matchedSkills.filter(
-          (skill) => selectedJob?.industry_specific.includes(skill)
-        ),
+        selectedRowData?.matchDetails.industrySpecificSkills.matchedSkills,
       missing: selectedJob?.industry_specific.filter(
         (skill) =>
           !selectedRowData?.matchDetails.industrySpecificSkills.matchedSkills.includes(
-            skill
+            skill.toLowerCase()
           ) && skill
       ),
     },
     genericSkills: {
       matches:
-        selectedRowData?.matchDetails.genericSkills.matchedSkills.filter(
-          (skill) => selectedJob?.generic_skills.includes(skill)
-        ),
+        selectedRowData?.matchDetails.genericSkills.matchedSkills,
       missing: selectedJob?.generic_skills.filter(
         (skill) =>
           !selectedRowData?.matchDetails.genericSkills.matchedSkills.includes(
-            skill
+            skill.toLowerCase()
           ) && skill
       ),
     },
