@@ -854,6 +854,9 @@ td {
 	.container {
 		width: 72em;
 	}
+	.container.test {
+		width: 88em;
+	}
 	.container-fluid {
 	}
 	.container {
@@ -2149,79 +2152,94 @@ a img {
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ MY STYLES */
-/* +++++++++++++++++++++++++++++++++ X VALUES FOR TOP TOP TOP ++++++++++++++++++++++++++++++++++++ */
-#map .map-grid .point.x10-project.x10-left {
+#map .map-grid .point.x10-manufacturing.x10-left {
 	left: -0.5%;
 }
-#map .map-grid .point.x10-project.x20-center {
-	left: 4.5%;
+#map .map-grid .point.x10-manufacturing.x20-center {
+	left: 3.5%;
 }
-#map .map-grid .point.x10-project.x30-right {
-	left: 9.5%;
+#map .map-grid .point.x10-manufacturing.x30-right {
+	left: 7.5%;
 }
-#map .map-grid .point.x10-project.x40-new {
-	left: 14.5%;
+#map .map-grid .point.x10-manufacturing.x40-new {
+	left: 11.5%;
 }
-#map .map-grid .point.x10-project.x50-newright {
+#map .map-grid .point.x10-manufacturing.x50-newright {
+	left: 15.5%;
+}
+
+#map .map-grid .point.x20-project.x10-left {
 	left: 19.5%;
 }
+#map .map-grid .point.x20-project.x20-center {
+	left: 23.5%;
+}
+#map .map-grid .point.x20-project.x30-right {
+	left: 27.5%;
+}
+#map .map-grid .point.x20-project.x40-new {
+	left: 31.5%;
+}
+#map .map-grid .point.x20-project.x50-newright {
+	left: 35.5%;
+}
 
-#map .map-grid .point.x20-construction.x10-left {
-	left: 24.5%;
-}
-#map .map-grid .point.x20-construction.x20-center {
-	left: 29.5%;
-}
-#map .map-grid .point.x20-construction.x30-right {
-	left: 34.5%;
-}
-#map .map-grid .point.x20-construction.x40-new {
+#map .map-grid .point.x30-construction.x10-left {
 	left: 39.5%;
 }
-#map .map-grid .point.x20-construction.x50-newright {
-	left: 44.5%;
+#map .map-grid .point.x30-construction.x20-center {
+	left: 43.5%;
+}
+#map .map-grid .point.x30-construction.x30-right {
+	left: 47.5%;
+}
+#map .map-grid .point.x30-construction.x40-new {
+	left: 51.5%;
+}
+#map .map-grid .point.x30-construction.x50-newright {
+	left: 55.5%;
 }
 
-#map .map-grid .point.x30-grid.x10-left {
-	left: 49.5%;
-}
-#map .map-grid .point.x30-grid.x20-center {
-	left: 54.5%;
-}
-#map .map-grid .point.x30-grid.x30-right {
+#map .map-grid .point.x40-grid.x10-left {
 	left: 59.5%;
 }
-#map .map-grid .point.x30-grid.x40-new {
-	left: 64.5%;
+#map .map-grid .point.x40-grid.x20-center {
+	left: 63.5%;
 }
-#map .map-grid .point.x30-grid.x50-newright {
-	left: 69.5%;
+#map .map-grid .point.x40-grid.x30-right {
+	left: 67.5%;
+}
+#map .map-grid .point.x40-grid.x40-new {
+	left: 71.5%;
+}
+#map .map-grid .point.x40-grid.x50-newright {
+	left: 75.5%;
 }
 
-#map .map-grid .point.x40-operations.x10-left {
-	left: 74.5%;
-}
-#map .map-grid .point.x40-operations.x20-center {
+#map .map-grid .point.x50-operations.x10-left {
 	left: 79.5%;
 }
-#map .map-grid .point.x40-operations.x30-right {
-	left: 84.5%;
+#map .map-grid .point.x50-operations.x20-center {
+	left: 83.5%;
 }
-#map .map-grid .point.x40-operations.x40-new {
-	left: 89.5%;
+#map .map-grid .point.x50-operations.x30-right {
+	left: 87.5%;
 }
-#map .map-grid .point.x40-operations.x50-newright {
-	left: 94%;
+#map .map-grid .point.x50-operations.x40-new {
+	left: 91.5%;
+}
+#map .map-grid .point.x50-operations.x50-newright {
+	left: 95.5%;
 }
 /* +++++++++++++++++++++++++++++++++ Y VALUES FOR TOP TOP TOP ++++++++++++++++++++++++++++++++++++ */
 #map .map-grid .point.y10-high-management {
 	top: -0.5%;
 }
 #map .map-grid .point.y20-mid-management {
-	top: 5%;
+	top: 6%;
 }
 #map .map-grid .point.y30-low-management {
-	top: 10.5%;
+	top: 12.5%;
 }
 
 #map .map-grid .point.y40-high-engineering {
@@ -2231,68 +2249,79 @@ a img {
 	top: 25.5%;
 }
 #map .map-grid .point.y60-low-engineering {
-	top: 31%;
+	top: 32%;
 }
 
-#map .map-grid .point.y70-high-planning {
+#map .map-grid .point.y70-high-safety {
 	top: 39.5%;
 }
-#map .map-grid .point.y80-mid-planning {
-	top: 45%;
+#map .map-grid .point.y80-mid-safety {
+	top: 46%;
 }
-#map .map-grid .point.y90-low-planning {
-	top: 50.5%;
+#map .map-grid .point.y90-low-safety {
+	top: 52.5%;
 }
 
-#map .map-grid .point.y100-high-safety {
+#map .map-grid .point.y100-high-supporting {
 	top: 59%;
 }
-#map .map-grid .point.y110-mid-safety {
+#map .map-grid .point.y110-mid-supporting {
 	top: 64.5%;
 }
-#map .map-grid .point.y120-low-safety {
+#map .map-grid .point.y120-low-supporting {
 	top: 70%;
 }
 
-#map .map-grid .point.y130-high-supporting {
-	top: 78.5%;
+#map .map-grid .point.y130-high-quality {
+	top: 79%;
 }
-#map .map-grid .point.y140-mid-supporting {
-	top: 84%;
+#map .map-grid .point.y140-mid-quality {
+	top: 84.5%;
 }
-#map .map-grid .point.y150-low-supporting {
-	top: 89.5%;
-}
-
-#map .map-grid .point.y160-high-construction {
-	top: 98%;
-}
-#map .map-grid .point.y170-mid-construction {
-	top: 103.5%;
-}
-#map .map-grid .point.y180-low-construction {
-	top: 109%;
+#map .map-grid .point.y150-low-quality {
+	top: 90%;
 }
 
-#map .map-grid .point.y190-high-quality {
-	top: 117.5%;
+#map .map-grid .point.y160-high-operation {
+	top: 99%;
 }
-#map .map-grid .point.y200-mid-quality {
-	top: 123%;
+#map .map-grid .point.y170-mid-operation {
+	top: 105.5%;
 }
-#map .map-grid .point.y210-low-quality {
-	top: 128.5%;
+#map .map-grid .point.y180-low-operation {
+	top: 112%;
 }
 
-#map .map-grid .point.y220-high-operation {
-	top: 137%;
+#map .map-grid .point.y160-high-operations {
+	top: 99%;
 }
-#map .map-grid .point.y230-mid-operation {
-	top: 142.5%;
+#map .map-grid .point.y170-mid-operations {
+	top: 105.5%;
 }
-#map .map-grid .point.y240-low-operation {
-	top: 148%;
+#map .map-grid .point.y180-low-operations {
+	top: 112%;
 }
+
+#map .map-grid .point.y190-high-planning {
+	top: 119.5%;
+}
+#map .map-grid .point.y200-mid-planning {
+	top: 125%;
+}
+#map .map-grid .point.y210-low-planning {
+	top: 131.5%;
+}
+
+#map .map-grid .point.y220-high-construction {
+	top: 139.5%;
+}
+#map .map-grid .point.y230-mid-construction {
+	top: 146%;
+}
+#map .map-grid .point.y240-low-construction {
+	top: 152%;
+}
+
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ MY STYLES */
 
 #map .map-grid .point a.square {
@@ -2544,6 +2573,15 @@ a img {
 	width: 24%;
 	height: 120px !important;
 }
+
+#map .map-row .block.five,
+#map .map-row .col-label.five {
+	position: relative;
+	float: left;
+	width: 19.2%;
+	height: 120px !important;
+}
+
 #map .map-row .block.advanced.residential {
 	background-color: rgb(20, 80, 40);
 }
@@ -2635,12 +2673,25 @@ a img {
 #map .map-row .block.entry.architecture {
 	background-color: rgb(40, 110, 140);
 }
+#map .map-row .block.entry.manufacturing {
+	background-color: rgb(40, 110, 140);
+}
 #map .map-grid .point.x10-architecture.y70-high-entry a.square .dot.dimmed,
 #map .map-grid .point.x10-architecture.y80-mid-entry a.square .dot.dimmed,
 #map .map-grid .point.x10-architecture.y90-low-entry a.square .dot.dimmed {
 	background-color: #e0efb9;
 }
 
+#map .map-row .block.advanced.manufacturing {
+	background-color: rgb(50, 120, 150);
+}
+#map .map-row .block.midlevel.manufacturing {
+	background-color: rgb(50, 120, 150);
+}
+
+#map .map-row .block.safety.manufacturing {
+	background-color: rgb(50, 120, 150);
+}
 #map .map-row .block.safety.planning {
 	background-color: rgb(50, 120, 150);
 }
@@ -2652,6 +2703,9 @@ a img {
 }
 #map .map-row .block.safety.maintenance {
 	background-color: rgb(65, 130, 95);
+}
+#map .map-row .block.supporting.manufacturing {
+	background-color: rgb(50, 120, 150);
 }
 #map .map-row .block.supporting.planning {
 	background-color: rgb(60, 130, 160);
@@ -2665,6 +2719,9 @@ a img {
 #map .map-row .block.supporting.maintenance {
 	background-color: rgb(75, 140, 100);
 }
+#map .map-row .block.constr.manufacturing {
+	background-color: rgb(50, 120, 150);
+}
 #map .map-row .block.constr.planning {
 	background-color: rgb(70, 140, 170);
 }
@@ -2677,6 +2734,9 @@ a img {
 #map .map-row .block.constr.maintenance {
 	background-color: rgb(85, 150, 110);
 }
+#map .map-row .block.quality.manufacturing {
+	background-color: rgb(50, 120, 150);
+}
 #map .map-row .block.quality.planning {
 	background-color: rgb(80, 150, 180);
 }
@@ -2688,6 +2748,9 @@ a img {
 }
 #map .map-row .block.quality.maintenance {
 	background-color: rgb(100, 160, 120);
+}
+#map .map-row .block.operations.manufacturing {
+	background-color: rgb(50, 120, 150);
 }
 #map .map-row .block.operations.planning {
 	background-color: rgb(90, 160, 190);
@@ -4507,3 +4570,85 @@ a,
 		padding-right: 0;
 	}
 }
+/*
+
+#map .map-grid .point.x10-manufacturing.x10-left {
+	left: -0.5%;
+}
+#map .map-grid .point.x10-manufacturing.x20-center {
+	left: 4.5%;
+}
+#map .map-grid .point.x10-manufacturing.x30-right {
+	left: 9.5%;
+}
+#map .map-grid .point.x10-manufacturing.x40-new {
+	left: 14.5%;
+}
+#map .map-grid .point.x10-manufacturing.x50-newright {
+	left: 19.5%;
+}
+
+#map .map-grid .point.x20-project.x10-left {
+	left: 24.5%;
+}
+#map .map-grid .point.x20-project.x20-center {
+	left: 29.5%;
+}
+#map .map-grid .point.x20-project.x30-right {
+	left: 34.5%;
+}
+#map .map-grid .point.x20-project.x40-new {
+	left: 39.5%;
+}
+#map .map-grid .point.x20-project.x50-newright {
+	left: 44.5%;
+}
+
+#map .map-grid .point.x30-construction.x10-left {
+	left: 49.5%;
+}
+#map .map-grid .point.x30-construction.x20-center {
+	left: 54.5%;
+}
+#map .map-grid .point.x30-construction.x30-right {
+	left: 59.5%;
+}
+#map .map-grid .point.x30-construction.x40-new {
+	left: 64.5%;
+}
+#map .map-grid .point.x30-construction.x50-newright {
+	left: 69.5%;
+}
+
+#map .map-grid .point.x40-grid.x10-left {
+	left: 74.5%;
+}
+#map .map-grid .point.x40-grid.x20-center {
+	left: 79.5%;
+}
+#map .map-grid .point.x40-grid.x30-right {
+	left: 84.5%;
+}
+#map .map-grid .point.x40-grid.x40-new {
+	left: 89.5%;
+}
+#map .map-grid .point.x40-grid.x50-newright {
+	left: 94%;
+}
+
+#map .map-grid .point.x50-operations.x10-left {
+	left: 99.5%;
+}
+#map .map-grid .point.x50-operations.x20-center {
+	left: 105%;
+}
+#map .map-grid .point.x50-operations.x30-right {
+	left: 110.5%;
+}
+#map .map-grid .point.x50-operations.x40-new {
+	left: 116%;
+}
+#map .map-grid .point.x50-operations.x50-newright {
+	left: 121.5%;
+}
+*/

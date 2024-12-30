@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IJob } from "../../../types/job-details/IGetJobRoles";
 import { calculateJobMatchScore } from "../../../infra/utility/calculateJobMatchScore";
-import { getJobRolesSolar } from "../../../infra/http/api-calls/job-details/getJobRolesSolar";
+import { getJobRolesWindSector } from "../../../infra/http/api-calls/job-details/getJobRolesWindSector";
 import { Link } from "react-router-dom";
 
 const subcategory: { [key: string]: number } = {
@@ -43,16 +43,13 @@ const rowPositionMap: { [key: number]: string } = {
 	220: "high",
 	230: "mid",
 	240: "low",
-	250: "high",
-	260: "mid",
-	270: "low",
 };
 
-export const JobRolePoints = () => {
+export const JobRolePointsWind = () => {
 	const [jobRoles, setJobRoles] = useState<IJob[] | null>(null);
 
 	const getRoles = async () => {
-		const response = await getJobRolesSolar();
+		const response = await getJobRolesWindSector();
 		setJobRoles(response.data);
 	};
 
@@ -62,12 +59,12 @@ export const JobRolePoints = () => {
 
 	let managementX = 0;
 	let engineeringX = 0;
-	let planningX = 0;
 	let safetyX = 0;
 	let supportingX = 0;
-	let constructionX = 0;
 	let qualityX = 0;
 	let operationsX = 0;
+	let planningX = 0;
+	let constructionX = 0;
 
 	let managementY = 10;
 	let engineeringY = 40;
@@ -90,7 +87,7 @@ export const JobRolePoints = () => {
 				jobRoles.forEach((otherJobRole: IJob) => {
 					if (jobRole.title !== otherJobRole.title) {
 						const similarScore = calculateJobMatchScore(jobRole, otherJobRole);
-						if (similarScore >= 4) {
+						if (similarScore >= 3.25) {
 							similarRoles.push(otherJobRole.title.trim());
 						}
 					}
@@ -105,12 +102,13 @@ export const JobRolePoints = () => {
 				if (i > 0 && jobRole.sub_sector !== jobRoles[i - 1].sub_sector) {
 					managementX = 0;
 					engineeringX = 0;
-					planningX = 0;
 					safetyX = 0;
 					supportingX = 0;
-					constructionX = 0;
 					qualityX = 0;
 					operationsX = 0;
+					planningX = 0;
+					constructionX = 0;
+
 					managementY = 10;
 					engineeringY = 40;
 					safetyY = 70;
@@ -120,7 +118,6 @@ export const JobRolePoints = () => {
 					planningY = 190;
 					constructionY = 220;
 				}
-
 				if (jobCategory === "management") {
 					if (managementX >= 50) {
 						managementX = 10;
@@ -143,19 +140,6 @@ export const JobRolePoints = () => {
 					}
 					xValue = engineeringX;
 					yValue = engineeringY;
-					columnPosition = columnPositionMap[xValue];
-					rowPosition = rowPositionMap[yValue];
-				}
-
-				if (jobCategory === "planning") {
-					if (planningX >= 50) {
-						planningX = 10;
-						planningY = planningY + 10;
-					} else {
-						planningX = planningX + 10;
-					}
-					xValue = planningX;
-					yValue = planningY;
 					columnPosition = columnPositionMap[xValue];
 					rowPosition = rowPositionMap[yValue];
 				}
@@ -186,19 +170,6 @@ export const JobRolePoints = () => {
 					rowPosition = rowPositionMap[yValue];
 				}
 
-				if (jobCategory === "construction") {
-					if (constructionX >= 50) {
-						constructionX = 10;
-						constructionY = constructionY + 10;
-					} else {
-						constructionX = constructionX + 10;
-					}
-					xValue = constructionX;
-					yValue = constructionY;
-					columnPosition = columnPositionMap[xValue];
-					rowPosition = rowPositionMap[yValue];
-				}
-
 				if (jobCategory === "quality") {
 					if (qualityX >= 50) {
 						qualityX = 10;
@@ -212,7 +183,7 @@ export const JobRolePoints = () => {
 					rowPosition = rowPositionMap[yValue];
 				}
 
-				if (jobCategory === "operations" || jobCategory === "operation") {
+				if (jobCategory === "operations") {
 					if (operationsX >= 50) {
 						operationsX = 10;
 						operationsY = operationsY + 10;
@@ -221,6 +192,32 @@ export const JobRolePoints = () => {
 					}
 					xValue = operationsX;
 					yValue = operationsY;
+					columnPosition = columnPositionMap[xValue];
+					rowPosition = rowPositionMap[yValue];
+				}
+
+				if (jobCategory === "planning") {
+					if (planningX >= 50) {
+						planningX = 10;
+						planningY = planningY + 10;
+					} else {
+						planningX = planningX + 10;
+					}
+					xValue = planningX;
+					yValue = planningY;
+					columnPosition = columnPositionMap[xValue];
+					rowPosition = rowPositionMap[yValue];
+				}
+
+				if (jobCategory === "construction") {
+					if (constructionX >= 50) {
+						constructionX = 10;
+						constructionY = constructionY + 10;
+					} else {
+						constructionX = constructionX + 10;
+					}
+					xValue = constructionX;
+					yValue = constructionY;
 					columnPosition = columnPositionMap[xValue];
 					rowPosition = rowPositionMap[yValue];
 				}
@@ -244,7 +241,7 @@ export const JobRolePoints = () => {
 								<div className="description-title">{jobRole.title}</div>
 								<p>{jobRole.job_role_definition}</p>
 								<Link
-									to={`/maps/solar-pv-development/job/${i}`}
+									to={`/maps/wind-power-development/job/${i}`}
 									state={jobRole}
 									className="button"
 								>

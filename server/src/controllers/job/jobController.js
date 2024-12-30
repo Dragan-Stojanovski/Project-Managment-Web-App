@@ -71,28 +71,24 @@ exports.jobImport = async (req, res) => {
 					employment_share: row[8],
 					skill_category: row[9],
 					academic_qualification: row[10]?.split(/\r?\n/) ?? "",
-					sub_major: row[11] ?? "N/A",
-					availability: row[12],
-					hard_skills: row[13]?.split(/\r?\n/) ?? "",
-					interpersonal_skills: row[14]?.split(/\r?\n/) ?? "",
-					industry_specific: row[15]?.split(/\r?\n/) ?? "",
-					generic_skills: row[16]?.split(/\r?\n/) ?? "",
-					technical_skills: row[17]?.split(/\r?\n/) ?? "",
-					soft_skills: row[18]?.split(/\r?\n/) ?? "",
+					sub_major: row[12] ?? "N/A",
+					hard_skills: row[15]?.split(/\r?\n/) ?? "",
+					interpersonal_skills: row[16]?.split(/\r?\n/) ?? "",
+					industry_specific: row[17]?.split(/\r?\n/) ?? "",
+					generic_skills: row[18]?.split(/\r?\n/) ?? "",
 					reference: row[19],
-					media: row[20],
 					sector: rows[0][1]?.trim(),
 					sub_sector: rows[1][1],
 				});
 
 				// Process skills
-				(row[13] || "").split(/\r?\n/).forEach(async (skill) => {
+				(row[15] || "").split(/\r?\n/).forEach(async (skill) => {
 					const cleanedSkill = skill.replace(/\d+-/, "");
 					const hardSkill = await HardSkill.findOne({ title: cleanedSkill });
 					if (!hardSkill) missingHardSkills.push(cleanedSkill);
 				});
 
-				(row[16] || "").split(/\r?\n/).forEach(async (skill) => {
+				(row[18] || "").split(/\r?\n/).forEach(async (skill) => {
 					const cleanedSkill = skill.replace(/\d+-/, "");
 					const genericSkill = await GenericSkill.findOne({
 						title: cleanedSkill,
@@ -100,7 +96,7 @@ exports.jobImport = async (req, res) => {
 					if (!genericSkill) missingGenericSkills.push(cleanedSkill);
 				});
 
-				(row[15] || "").split(/\r?\n/).forEach(async (skill) => {
+				(row[17] || "").split(/\r?\n/).forEach(async (skill) => {
 					const cleanedSkill = skill.replace(/\d+-/, "");
 					const industrySpecificSkill = await IndustrySpecificSkill.findOne({
 						title: cleanedSkill,

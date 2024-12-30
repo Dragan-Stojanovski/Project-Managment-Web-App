@@ -9,11 +9,21 @@ const NavBar = (): JSX.Element => {
 	const [isDropdownVisible, setIsDropdownVisible] = useState(
 		isMobile ? false : true
 	);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const toggleDropdown = () => {
+		setIsDropdownOpen(!isDropdownOpen);
+	};
+	const handleCareerMapsClick = (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+	) => {
+		e.preventDefault(); // Prevent default navigation behavior
+		toggleDropdown(); // Toggle dropdown visibility
+	};
 
 	const navItems = [
 		{ label: "Home", path: "/" },
 		{ label: "Job Details", path: "/job-details" },
-		{ label: "Career Map", path: "/map" },
+		{ label: "Career Maps", path: "/maps" },
 		{ label: "Import", path: "/import" },
 		{ label: "Sign In", path: "/signin" },
 	];
@@ -51,8 +61,55 @@ const NavBar = (): JSX.Element => {
 				<div>
 					<ul className={styles.menu}>
 						{navItems.map((item) => (
-							<li key={item.label}>
-								<Link to={item.path}>{item.label}</Link>
+							<li
+								key={item.label}
+								className={item.label === "Career Maps" ? styles.dropdown : ""}
+							>
+								<Link
+									to={item.path}
+									onClick={
+										item.label === "Career Maps"
+											? handleCareerMapsClick
+											: undefined
+									}
+								>
+									{item.label}
+								</Link>
+								{/* Show dropdown if it's Career Maps and dropdown is open */}
+								{item.label === "Career Maps" && isDropdownOpen && (
+									<ul className={styles.dropdownMenu}>
+										<li>
+											<Link to="/maps/solar-pv-development">
+												Solar PV Development
+											</Link>
+										</li>
+										<li>
+											<Link to="/maps/wind-power-development">
+												Wind Power Development
+											</Link>
+										</li>
+										<li>
+											<Link to="/maps/energy-management-optimization">
+												Energy Management & System Optimization
+											</Link>
+										</li>
+										<li>
+											<Link to="/maps/minerals-metals-extraction">
+												Minerals & Metals Extraction
+											</Link>
+										</li>
+										<li>
+											<Link to="/maps/clean-steel-aluminium">
+												Clean Steel and Aluminium
+											</Link>
+										</li>
+										<li>
+											<Link to="/maps/clean-cement-concrete">
+												Clean Cement and Concrete
+											</Link>
+										</li>
+									</ul>
+								)}
 							</li>
 						))}
 						<li className={styles.get_started}>
